@@ -1,18 +1,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.glydar.paraglydar</groupId>
-  <artifactId>ParaGlydar</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>ParaGlydar</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.glydar.paraglydar</groupId>
+    <artifactId>ParaGlydar</artifactId>
+    <version>${paraglydar.mainversion}</version>
+    <name>ParaGlydar</name>
+    <packaging>jar</packaging>
+    <url>https://github.com/Glydar/ParaGlydar</url>
+
+    <properties>
+        <paraglydar.majorversion>0</paraglydar.majorversion>
+        <paraglydar.minorversion>0</paraglydar.minorversion>
+        <paraglydar.revisionversion>0</paraglydar.revisionversion>
+        <paraglydar.mainversion>${paraglydar.majorversion}.${paraglydar.minorversion}.${paraglydar.revisionversion}</paraglydar.mainversion>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>Sonatype-public</id>
+            <name>SnakeYAML repository</name>
+            <url>http://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.13-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
