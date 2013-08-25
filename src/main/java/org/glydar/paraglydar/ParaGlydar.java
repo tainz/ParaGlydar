@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 public class ParaGlydar
 {
 	private static final Logger LOGGER = Logger.getLogger(ParaGlydar.class.getName());
+	private static Server s;
 
 	private ParaGlydar() {
 		LOGGER.setUseParentHandlers(false);
@@ -21,9 +22,16 @@ public class ParaGlydar
 		LOGGER.addHandler(console);
 	}
 
-    public static void main( String[] args )
-    {
-	    // TODO
+    public static void setServer(Server server){
+    	if (s == null){
+    		s = server;
+    	} else {
+    		s.getLogger().severe("Can't change the server instance!");
+    	}
+    }
+    
+    public static Server getServer(){
+    	return s;
     }
 
 	public static Logger getLogger() {

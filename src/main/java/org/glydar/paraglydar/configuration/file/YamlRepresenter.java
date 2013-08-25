@@ -6,7 +6,6 @@ import java.util.Map;
 import org.glydar.paraglydar.configuration.ConfigurationSection;
 import org.glydar.paraglydar.configuration.serialization.ConfigurationSerializable;
 import org.glydar.paraglydar.configuration.serialization.ConfigurationSerialization;
-
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.representer.Representer;
 

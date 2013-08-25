@@ -3,7 +3,7 @@ package org.glydar.paraglydar.configuration.file;
 import com.google.common.io.Files;
 
 import org.apache.commons.lang.Validate;
-import org.glydar.paraglydar.configuration.InvalidConfigurationException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +12,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
 import org.glydar.paraglydar.configuration.Configuration;
+import org.glydar.paraglydar.configuration.InvalidConfigurationException;
 import org.glydar.paraglydar.configuration.MemoryConfiguration;
 
 /**
