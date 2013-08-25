@@ -12,7 +12,7 @@
     <properties>
         <paraglydar.majorversion>0</paraglydar.majorversion>
         <paraglydar.minorversion>0</paraglydar.minorversion>
-        <paraglydar.revisionversion>0</paraglydar.revisionversion>
+        <paraglydar.revisionversion>1</paraglydar.revisionversion>
         <paraglydar.mainversion>${paraglydar.majorversion}.${paraglydar.minorversion}.${paraglydar.revisionversion}</paraglydar.mainversion>
     </properties>
 
