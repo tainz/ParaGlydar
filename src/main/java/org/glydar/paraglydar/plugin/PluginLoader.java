@@ -131,7 +131,6 @@ public class PluginLoader {
 		} catch (Exception ex) {
 			while (e.hasMoreElements()) {
 				JarEntry entry = e.nextElement();
-				System.out.println(entry.getName());
 				if (entry.isDirectory() || !entry.getName().endsWith(".class"))
 					continue;
 				String className = entry.getName().substring(0, entry.getName().length() - 6);
