@@ -134,27 +134,27 @@ public interface Appearance {
 
 	public void setBackPitch(float backPitch);
 
-	public Vector3 getBodyOffset();
+	public Vector3<Float> getBodyOffset();
 
-	public void setBodyOffset(Vector3 bodyOffset);
+	public void setBodyOffset(Vector3<Float> bodyOffset);
 
-	public Vector3 getHeadOffset();
+	public Vector3<Float> getHeadOffset();
 
-	public void setHeadOffset(Vector3 headOffset);
+	public void setHeadOffset(Vector3<Float> headOffset);
 
-	public Vector3 getHandOffset();
+	public Vector3<Float> getHandOffset();
 
-	public void setHandOffset(Vector3 handOffset);
+	public void setHandOffset(Vector3<Float> handOffset);
 
-	public Vector3 getFootOffset();
+	public Vector3<Float> getFootOffset();
 
-	public void setFootOffset(Vector3 footOffset);
+	public void setFootOffset(Vector3<Float> footOffset);
 
-	public Vector3 getBackOffset();
+	public Vector3<Float> getBackOffset();
 
-	public void setBackOffset(Vector3 backOffset);
+	public void setBackOffset(Vector3<Float> backOffset);
 
-	public Vector3 getWingOffset();
+	public Vector3<Float> getWingOffset();
 
-	public void setWingOffset(Vector3 wingOffset);
+	public void setWingOffset(Vector3<Float> wingOffset);
 }

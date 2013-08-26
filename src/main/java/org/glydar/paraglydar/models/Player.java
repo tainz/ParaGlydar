@@ -2,10 +2,12 @@ package org.glydar.paraglydar.models;
 
 import java.util.List;
 
+import org.glydar.paraglydar.command.CommandSender;
+import org.glydar.paraglydar.permissions.Permissible;
 import org.glydar.paraglydar.permissions.Permission;
 import org.glydar.paraglydar.permissions.PermissionAttachment;
 
-public interface Player extends Entity {
+public interface Player extends Entity, BaseTarget, CommandSender, Permissible {
 
 	public String getIp();
 	

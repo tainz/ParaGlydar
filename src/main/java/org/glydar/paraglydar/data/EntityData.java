@@ -8,17 +8,9 @@ public interface EntityData {
 	
 	public byte[] getBitmask();
 
-	public long getPosX();
+	public Vector3<Long> getPosition();
 
-	public void setPosX(long posX);
-
-	public long getPosY();
-
-	public void setPosY(long posY);
-
-	public long getPosZ();
-
-	public void setPosZ(long posZ);
+	public void setPosition(Vector3<Long> pos);
 
 	public float getRoll();
 
@@ -32,17 +24,17 @@ public interface EntityData {
 
 	public void setYaw(float yaw);
 
-	public Vector3 getVelocity();
+	public Vector3<Float> getVelocity();
 
-	public void setVelocity(Vector3 velocity);
+	public void setVelocity(Vector3<Float> velocity);
 
-	public Vector3 getAccel();
+	public Vector3<Float> getAccel();
 
-	public void setAccel(Vector3 accel);
+	public void setAccel(Vector3<Float> accel);
 
-	public Vector3 getExtraVel();
+	public Vector3<Float> getExtraVel();
 
-	public void setExtraVel(Vector3 extraVel);
+	public void setExtraVel(Vector3<Float> extraVel);
 
 	public float getLookPitch();
 
@@ -124,9 +116,9 @@ public interface EntityData {
 
 	public void setChargedMP(float chargedMP);
 
-	public Vector3 getRayHit();
+	public Vector3<Float> getRayHit();
 
-	public void setRayHit(Vector3 rayHit);
+	public void setRayHit(Vector3<Float> rayHit);
 
 	public float getHP();
 
