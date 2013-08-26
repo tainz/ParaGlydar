@@ -12,6 +12,10 @@ public interface Server {
 
 	EventManager getEventManager();
 
+	public String getName();
+
+	public String getVersion();
+
 	public Collection<Player> getConnectedPlayers();
 	
 	public Collection<Entity> getConnectedEntities();

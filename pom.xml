@@ -4,7 +4,7 @@
 
     <groupId>org.glydar.paraglydar</groupId>
     <artifactId>ParaGlydar</artifactId>
-    <version>${paraglydar.mainversion}</version>
+    <version>${paraglydar.mainversion}-SNAPSHOT</version>
     <name>ParaGlydar</name>
     <packaging>jar</packaging>
     <url>https://github.com/Glydar/ParaGlydar</url>
