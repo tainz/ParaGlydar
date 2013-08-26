@@ -35,11 +35,6 @@
             <name>SnakeYAML repository</name>
             <url>http://oss.sonatype.org/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>ParaGlydar-mvn-repo</id>
-            <name>ParaGlydar</name>
-            <url>maven.cyberkitsune.net</url>
-        </repository>
     </repositories>
 
     <dependencies>
