@@ -4,31 +4,29 @@
 
     <groupId>org.glydar.paraglydar</groupId>
     <artifactId>ParaGlydar</artifactId>
-    <version>${paraglydar.mainversion}-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
+
     <name>ParaGlydar</name>
-    <packaging>jar</packaging>
     <url>https://github.com/Glydar/ParaGlydar</url>
 
     <properties>
-        <paraglydar.majorversion>0</paraglydar.majorversion>
-        <paraglydar.minorversion>0</paraglydar.minorversion>
-        <paraglydar.revisionversion>1</paraglydar.revisionversion>
-        <paraglydar.mainversion>${paraglydar.majorversion}.${paraglydar.minorversion}.${paraglydar.revisionversion}</paraglydar.mainversion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <build>
+        <defaultGoal>clean install</defaultGoal>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.0</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
 
     <repositories>
@@ -37,33 +35,37 @@
             <name>SnakeYAML repository</name>
             <url>http://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>ParaGlydar-mvn-repo</id>
+            <name>ParaGlydar</name>
+            <url>maven.cyberkitsune.net</url>
+        </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.13-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>14.0.1</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
+
 </project>
