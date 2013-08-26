@@ -1,6 +1,8 @@
 Paraglydar
 ==========
 
+API for open source cube world server Glydar.
+
 Add to your parent pom.xml:
 
       <repositories>
