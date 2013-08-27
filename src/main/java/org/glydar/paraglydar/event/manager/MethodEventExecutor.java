@@ -3,6 +3,7 @@ package org.glydar.paraglydar.event.manager;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.glydar.paraglydar.ParaGlydar;
 import org.glydar.paraglydar.event.Cancellable;
 import org.glydar.paraglydar.event.Event;
 import org.glydar.paraglydar.event.EventHandler;
@@ -42,6 +43,8 @@ public class MethodEventExecutor<E extends Event> implements EventExecutor<E> {
 			throw new MethodEventExecutorException(exc);
 		} catch (InvocationTargetException exc) {
 			throw new MethodEventExecutorException(exc.getCause());
+		} catch (Exception e) {
+			//TODO: Catch plugin exceptions properly!
 		}
 	}
 
