@@ -3,7 +3,6 @@ package org.glydar.paraglydar.event.manager;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -146,9 +145,8 @@ public class EventManager {
 	}
 
 	private void unregisterAllIf(Predicate<RegisteredHandler> predicate) {
-		Iterator<RegisteredHandlers> handlersIt = map.values().iterator();
-		while (handlersIt.hasNext()) {
-			handlersIt.next().removeHandlersIf(predicate);
+		for (RegisteredHandlers handlers : map.values()) {
+			handlers.removeHandlersIf(predicate);
 		}
 	}
 

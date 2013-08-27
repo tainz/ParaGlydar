@@ -28,11 +28,11 @@ class RegisteredHandlers {
 	private final List<RegisteredHandler> list = new ArrayList<>();
 	EventExecutor<?>[] resolvedExecutors = new EventExecutor<?>[0];
 
-	RegisteredHandlers() {
+	public RegisteredHandlers() {
 		this.parent = null;
 	}
 
-	RegisteredHandlers(RegisteredHandlers parent) {
+	public RegisteredHandlers(RegisteredHandlers parent) {
 		this.parent = parent;
 		parent.addChild(this);
 	}
@@ -63,7 +63,7 @@ class RegisteredHandlers {
 		resolve();
 	}
 
-	void removeHandlersIf(Predicate<RegisteredHandler> predicate) {
+	public void removeHandlersIf(Predicate<RegisteredHandler> predicate) {
 		boolean modified = false;
 
 		Iterator<RegisteredHandler> handlerIt = list.iterator();
@@ -88,7 +88,7 @@ class RegisteredHandlers {
 		}
 	}
 
-	public static class RegisteredHandler implements Comparable<RegisteredHandler> {
+	static class RegisteredHandler implements Comparable<RegisteredHandler> {
 
 		private final Plugin plugin;
 		private final EventPriority priority;
@@ -107,7 +107,7 @@ class RegisteredHandlers {
 			return plugin;
 		}
 
-		public EventPriority getOrder() {
+		public EventPriority getPriority() {
 			return priority;
 		}
 
