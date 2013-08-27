@@ -27,7 +27,7 @@ public final class CommandManager {
 		return null;
 	}
 
-	protected static boolean addCommand(Command cmd, CommandExecutor executor) {
+	public static boolean addCommand(Command cmd, CommandExecutor executor) {
 		if (executors.containsKey(cmd) || executors.containsValue(executor)) {
 			return false;
 		}
