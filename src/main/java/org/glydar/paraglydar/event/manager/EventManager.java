@@ -61,13 +61,13 @@ public class EventManager {
 	}
 
 	private <E extends Event> void register(Plugin plugin, Listener listener, Method method, Class<E> eventClass,
-			EventHandler annotation) {
+	                                        EventHandler annotation) {
 		MethodEventExecutor<E> executor = new MethodEventExecutor<E>(eventClass, listener, method, annotation);
 		register(plugin, eventClass, executor, annotation.priority());
 	}
 
 	public <E extends Event> void register(Plugin plugin, Class<E> eventClass, EventExecutor<E> executor,
-			EventPriority priority) {
+	                                       EventPriority priority) {
 		if (Modifier.isAbstract(eventClass.getModifiers())) {
 			throw new UnsupportedOperationException();
 		}
@@ -80,9 +80,9 @@ public class EventManager {
 	/**
 	 * Retrieves or creates the {@link RegisteredHandlers} for the given event
 	 * class.
-	 * <p>
+	 * <p/>
 	 * If the RegisteredHandlers does not already exist, this method will
-	 * create it, recursively calling itself to get or create the 
+	 * create it, recursively calling itself to get or create the
 	 * RegisteredHandlers of the superclass.
 	 */
 	private RegisteredHandlers getHandlers(Class<? extends Event> eventClass) {
@@ -93,8 +93,7 @@ public class EventManager {
 			if (!Modifier.isAbstract(eventSuperClass.getModifiers())) {
 				RegisteredHandlers parentHandlers = getHandlers(eventSuperClass);
 				handlers = new RegisteredHandlers(parentHandlers);
-			}
-			else {
+			} else {
 				handlers = new RegisteredHandlers();
 			}
 

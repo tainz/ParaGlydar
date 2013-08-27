@@ -16,12 +16,12 @@ public class PlayerJoinEvent extends Event {
 	public Player getPlayer() {
 		return player;
 	}
-	
-	public String getJoinMessage(){
+
+	public String getJoinMessage() {
 		return joinMessage;
 	}
 
-	public void setJoinMessage(String m){
+	public void setJoinMessage(String m) {
 		this.joinMessage = m;
 	}
 }

@@ -21,5 +21,5 @@ public interface ItemUpgrade {
 	public long getLevel();
 
 	public void setLevel(long level);
-	
+
 }

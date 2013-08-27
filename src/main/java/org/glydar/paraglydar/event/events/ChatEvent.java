@@ -44,16 +44,16 @@ public class ChatEvent extends Event implements Cancellable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-	
-	public BaseTarget getTarget(){
+
+	public BaseTarget getTarget() {
 		return recievers;
 	}
-	
-	public Collection<Player> getRecievers(){
+
+	public Collection<Player> getRecievers() {
 		return recievers.getPlayers();
 	}
-	
-	public void setRecievers(Collection<Player> c){
+
+	public void setRecievers(Collection<Player> c) {
 		recievers = new CustomTarget(c);
 	}
 }

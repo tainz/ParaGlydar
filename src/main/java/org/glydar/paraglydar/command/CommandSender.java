@@ -7,8 +7,8 @@ import org.glydar.paraglydar.permissions.Permissible;
  */
 public interface CommandSender extends Permissible {
 
-    public String getName();
+	public String getName();
 
-    public void sendMessage(String message);
-    
+	public void sendMessage(String message);
+
 }

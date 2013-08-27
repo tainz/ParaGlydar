@@ -2,12 +2,12 @@ package org.glydar.paraglydar.event;
 
 /**
  * Describes priority of an event handler.
- * <p>
+ * <p/>
  * Priority are a convention between plugins to avoid incompatibilities as
  * much as possible. Thus, the priority of an handler should be chosen wisely.
- * <p>
+ * <p/>
  * Handlers are called from LOWEST first to MONITOR last.
- * <p>
+ * <p/>
  * This order may be confusing at first, but here's the reason why :
  * First thing to understand is that there's not way for an handler to say
  * "Ok, I've handled this one, no others handlers should be notified of it.".

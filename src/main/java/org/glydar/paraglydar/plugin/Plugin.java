@@ -15,9 +15,11 @@ public abstract class Plugin implements CommandExecutor {
 	private Server server;
 	private boolean enabled = false;
 
-	public void onEnable() {}
+	public void onEnable() {
+	}
 
-	public void onDisable() {}
+	public void onDisable() {
+	}
 
 	public abstract String getVersion();
 
@@ -107,15 +109,15 @@ public abstract class Plugin implements CommandExecutor {
 		}
 	}
 
-        protected final void initialize(Server server, PluginLoader loader, PluginLogger logger) {
-            this.server = server;
-            this.logger = logger;
-            this.loader = loader;
-        }
-        
-        @Override
-        public CommandOutcome execute(CommandSender cs, Command cmd, String lbl, String[] args) {
-            return CommandOutcome.NOT_HANDLED;
-        }
+	protected final void initialize(Server server, PluginLoader loader, PluginLogger logger) {
+		this.server = server;
+		this.logger = logger;
+		this.loader = loader;
+	}
+
+	@Override
+	public CommandOutcome execute(CommandSender cs, Command cmd, String lbl, String[] args) {
+		return CommandOutcome.NOT_HANDLED;
+	}
 
 }

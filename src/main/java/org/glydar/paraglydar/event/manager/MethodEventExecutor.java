@@ -38,11 +38,9 @@ public class MethodEventExecutor<E extends Event> implements EventExecutor<E> {
 
 		try {
 			method.invoke(listener, event);
-		}
-		catch (IllegalAccessException | IllegalArgumentException exc) {
+		} catch (IllegalAccessException | IllegalArgumentException exc) {
 			throw new MethodEventExecutorException(exc);
-		}
-		catch (InvocationTargetException exc) {
+		} catch (InvocationTargetException exc) {
 			throw new MethodEventExecutorException(exc.getCause());
 		}
 	}

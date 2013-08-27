@@ -17,22 +17,22 @@ public interface Server {
 	public String getVersion();
 
 	public Collection<Player> getConnectedPlayers();
-	
+
 	public Collection<Entity> getConnectedEntities();
-	
+
 	public Entity getEntityByEntityID(long id);
-	
+
 	public Player getPlayerByEntityID(long id);
 
 	public Logger getLogger();
 
 	public boolean isRunning();
 
-    public void shutdown();
-    
-    public void broadcastMessage(String message);
-    
-    public void broadcast(String message, String permission);
+	public void shutdown();
 
-    public void broadcast(String message, Permission permission);
+	public void broadcastMessage(String message);
+
+	public void broadcast(String message, String permission);
+
+	public void broadcast(String message, Permission permission);
 }

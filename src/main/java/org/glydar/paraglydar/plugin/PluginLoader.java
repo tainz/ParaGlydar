@@ -97,7 +97,7 @@ public class PluginLoader {
 		if (!file.getName().endsWith(".jar"))
 			throw new PluginException("File must be a jar file!");
 		JarFile jFile = new JarFile(file.getPath());
-		URL[] urls = { file.toURI().toURL() };
+		URL[] urls = {file.toURI().toURL()};
 		URLClassLoader cl = new URLClassLoader(urls, getClass().getClassLoader());
 		Enumeration<JarEntry> e = jFile.entries();
 		Class<? extends Plugin> clazz = null;
@@ -177,7 +177,7 @@ public class PluginLoader {
 	}
 
 	public URLClassLoader getClassLoader(Plugin plugin) {
-		URLClassLoader cl = new URLClassLoader(new URL[] { jarMap.get(plugin.getName()) });
+		URLClassLoader cl = new URLClassLoader(new URL[]{jarMap.get(plugin.getName())});
 		return cl;
 	}
 

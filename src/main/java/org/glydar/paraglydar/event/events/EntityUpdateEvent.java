@@ -32,24 +32,24 @@ public class EntityUpdateEvent extends Event {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-	
-	public EntityData getEntityData(){
+
+	public EntityData getEntityData() {
 		return ed;
 	}
-	
-	public void setEntityData(EntityData ed){
+
+	public void setEntityData(EntityData ed) {
 		this.ed = ed;
 	}
-	
-	public BaseTarget getTarget(){
+
+	public BaseTarget getTarget() {
 		return recievers;
 	}
-	
-	public Collection<Player> getRecievers(){
+
+	public Collection<Player> getRecievers() {
 		return recievers.getPlayers();
 	}
-	
-	public void setRecievers(Collection<Player> c){
+
+	public void setRecievers(Collection<Player> c) {
 		recievers = new CustomTarget(c);
 	}
 }

@@ -5,7 +5,7 @@ public interface EntityData {
 	public long getId();
 
 	public void setId(long id);
-	
+
 	public byte[] getBitmask();
 
 	public Vector3<Long> getPosition();
@@ -287,5 +287,5 @@ public interface EntityData {
 	public int getDebugCap();
 
 	public void setDebugCap(int debugCap);
-	
+
 }

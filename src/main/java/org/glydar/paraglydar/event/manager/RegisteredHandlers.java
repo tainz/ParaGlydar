@@ -12,11 +12,11 @@ import com.google.common.base.Predicate;
 
 /**
  * Stores each registered handler of a given {@link Event} subclass.
- * <p>
- * These classes holds a reference to `parent` and `children` 
- * RegisteredHandlers, thus creating a tree hierarchy which is supposed to 
+ * <p/>
+ * These classes holds a reference to `parent` and `children`
+ * RegisteredHandlers, thus creating a tree hierarchy which is supposed to
  * mirror the Event classes one.
- * <p>
+ * <p/>
  * In other words, the parent of an instance storing handlers of a given Event
  * class, is the RegisteredHandlers instance storing handler for the superclass
  * of this Event class.
@@ -96,7 +96,7 @@ class RegisteredHandlers {
 		private int index;
 
 		public RegisteredHandler(Plugin plugin, int index,
-				EventPriority priority, EventExecutor<?> executor) {
+		                         EventPriority priority, EventExecutor<?> executor) {
 			this.plugin = plugin;
 			this.index = index;
 			this.priority = priority;

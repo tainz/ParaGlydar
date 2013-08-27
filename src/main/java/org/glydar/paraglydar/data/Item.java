@@ -41,5 +41,5 @@ public interface Item {
 	public long getUpgradeCount();
 
 	public void setUpgradeCount(long upgradeCount);
-	
+
 }
