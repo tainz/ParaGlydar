@@ -7,7 +7,9 @@ import org.glydar.api.events.manager.HelpersEvent.DummyEvent;
 import org.glydar.api.events.manager.HelpersEvent.SubEvent;
 import org.glydar.api.events.manager.HelpersListener.CallListener;
 import org.glydar.api.events.manager.HelpersListener.CancellableListener;
+import org.glydar.api.events.manager.HelpersListener.ExceptionListener;
 import org.glydar.api.events.manager.HelpersListener.PrioritiesListener;
+import org.glydar.api.test.NullLogger;
 import org.glydar.paraglydar.event.Listener;
 import org.glydar.paraglydar.event.manager.EventManager;
 import org.glydar.paraglydar.plugin.Plugin;
@@ -22,7 +24,7 @@ public class EventManagerTest {
 	@Before
 	public void setUp() {
 		this.plugin = new DummyPlugin();
-		this.eventManager = new EventManager();
+		this.eventManager = new EventManager(new NullLogger());
 	}
 
 	private <L extends Listener> L register(L listener) {
@@ -32,8 +34,13 @@ public class EventManagerTest {
 
 	@Test
 	public void testDummyEvent() {
-		eventManager.callEvent(new DummyEvent());
 		// Nothing registered, ensure there's no exception
+		try {
+			eventManager.callEvent(new DummyEvent());
+		}
+		catch (Exception exc) {
+			fail();
+		}
 	}
 
 	@Test
@@ -44,6 +51,16 @@ public class EventManagerTest {
 		assertTrue(listener.testEventCalled());
 	}
 
+	@Test
+	public void testRegisterAndCallWithException() {
+		register(new ExceptionListener());
+		try {
+			eventManager.callEvent(new DummyEvent());
+		}
+		catch (Exception exc) {
+			fail();
+		}
+	}
 	@Test
 	public void testRegisterAndCallSubEvent() {
 		CallListener listener = register(new CallListener());

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import org.glydar.paraglydar.ParaGlydar;
 import org.glydar.paraglydar.event.Event;
 import org.glydar.paraglydar.event.EventHandler;
 import org.glydar.paraglydar.event.EventPriority;
@@ -19,8 +19,15 @@ import com.google.common.base.Predicate;
 
 public class EventManager {
 
-	private int handlerIndex = 0;
-	private final Map<Class<? extends Event>, RegisteredHandlers> map = new HashMap<>();
+	private final Logger logger;
+	private final Map<Class<? extends Event>, RegisteredHandlers> map;
+	private int handlerIndex;
+
+	public EventManager(Logger logger) {
+		this.logger = logger;
+		this.map = new HashMap<>();
+		this.handlerIndex = 0;
+	}
 
 	public boolean register(Plugin plugin, Listener listener) {
 		for (Method method : listener.getClass().getDeclaredMethods()) {
@@ -57,7 +64,7 @@ public class EventManager {
 	}
 
 	private void logInvalidEventHandlerMethod(Object... args) {
-		ParaGlydar.getServer().getLogger().log(Level.WARNING, "Event Handler Method `{0}` {1}, skipping", args);
+		logger.log(Level.WARNING, "Event Handler Method `{0}` {1}, skipping", args);
 	}
 
 	private <E extends Event> void register(Plugin plugin, Listener listener, Method method, Class<E> eventClass,
@@ -150,7 +157,13 @@ public class EventManager {
 		for (EventExecutor<?> rawExecutor : handlers.resolvedExecutors) {
 			@SuppressWarnings("unchecked")
 			EventExecutor<? super E> executor = (EventExecutor<? super E>) rawExecutor;
-			executor.execute(event);
+			try {
+				executor.execute(event);
+			}
+			catch (Exception exc) {
+				logger.log(Level.WARNING,
+						"Exception thrown in Event handler", exc);
+			}
 		}
 
 		return event;

@@ -90,4 +90,12 @@ public class HelpersListener {
 			return testHighestEventCallPosition;
 		}
 	}
+
+	public static class ExceptionListener implements Listener {
+
+		@EventHandler
+		public void test(DummyEvent event) {
+			throw new RuntimeException();
+		}
+	}
 }
