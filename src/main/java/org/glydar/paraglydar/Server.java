@@ -35,6 +35,4 @@ public interface Server {
 	public void broadcast(String message, String permission);
 
 	public void broadcast(String message, Permission permission);
-
-	public void issueCommand(String command);
 }
