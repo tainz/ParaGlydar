@@ -17,10 +17,6 @@ public interface World {
 	
 	public int getSeed();
 	
-	public void setSeed(int seed);
-	
-	public void setName(String name);
-	
 	public String getName();
 	
 	public void broadcastMessage(String message);

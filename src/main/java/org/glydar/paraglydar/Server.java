@@ -1,11 +1,13 @@
 package org.glydar.paraglydar;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.glydar.paraglydar.event.manager.EventManager;
 import org.glydar.paraglydar.models.Entity;
 import org.glydar.paraglydar.models.Player;
+import org.glydar.paraglydar.models.World;
 import org.glydar.paraglydar.permissions.Permission;
 
 public interface Server {
@@ -23,6 +25,10 @@ public interface Server {
 	public Entity getEntityByEntityID(long id);
 
 	public Player getPlayerByEntityID(long id);
+	
+	public World getDefaultWorld();
+	
+	public Map<Long,World> getWorlds();
 
 	public Logger getLogger();
 
