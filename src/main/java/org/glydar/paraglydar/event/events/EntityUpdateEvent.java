@@ -8,17 +8,19 @@ import org.glydar.paraglydar.models.BaseTarget;
 import org.glydar.paraglydar.models.CustomTarget;
 import org.glydar.paraglydar.models.EveryoneTarget;
 import org.glydar.paraglydar.models.Player;
+import org.glydar.paraglydar.models.WorldTarget;
 
 public class EntityUpdateEvent extends Event {
 
 	private boolean cancelled = false;
 	private Player player;
 	private EntityData ed;
-	private BaseTarget recievers = EveryoneTarget.INSTANCE;
+	private BaseTarget recievers;
 
 	public EntityUpdateEvent(final Player player, final EntityData ed) {
 		this.setPlayer(player);
 		this.setEntityData(ed);
+		recievers = new WorldTarget(player.getWorld());
 	}
 
 	public boolean isCancelled() {

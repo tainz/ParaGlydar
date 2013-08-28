@@ -8,17 +8,19 @@ import org.glydar.paraglydar.models.BaseTarget;
 import org.glydar.paraglydar.models.CustomTarget;
 import org.glydar.paraglydar.models.EveryoneTarget;
 import org.glydar.paraglydar.models.Player;
+import org.glydar.paraglydar.models.WorldTarget;
 
 public class ChatEvent extends Event implements Cancellable {
 
 	private boolean cancelled = false;
 	private Player player;
 	private String message;
-	private BaseTarget recievers = EveryoneTarget.INSTANCE;
+	private BaseTarget recievers;
 
 	public ChatEvent(final Player player, final String message) {
 		this.setPlayer(player);
 		this.message = message;
+		recievers = new WorldTarget(player.getWorld());
 	}
 
 	@Override

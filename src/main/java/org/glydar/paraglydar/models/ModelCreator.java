@@ -8,4 +8,7 @@ public interface ModelCreator {
 	public NPC createNPC();
 
 	public NPC createNPC(EntityData e);
+	
+	//Creating Worlds
+	public World createWorld(String name, int seed);
 }

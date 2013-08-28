@@ -30,4 +30,7 @@ public interface Player extends Entity, BaseTarget, CommandSender, Permissible {
 	public void setAdmin(boolean admin);
 
 	public String getName();
+	
+	public void changeWorld(World w);
+	
 }

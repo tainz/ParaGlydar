@@ -6,8 +6,9 @@ public interface Entity {
 
 	public long getEntityId();
 
+	public World getWorld();
+	
 	/**
-	 * Temporary fix to allow plugins to manipulate entityData while we fix other issues.
 	 * Call this whenever you modify anything in Player.data and wish to update all of the clients.
 	 */
 	public void forceUpdateData();
