@@ -1,11 +1,11 @@
-package org.glydar.api.events.manager;
+package org.glydar.paraglydar.events.manager;
 
-import org.glydar.api.events.manager.HelpersEvent.CancellableEvent;
-import org.glydar.api.events.manager.HelpersEvent.DummyEvent;
-import org.glydar.api.events.manager.HelpersEvent.SubEvent;
 import org.glydar.paraglydar.event.EventHandler;
 import org.glydar.paraglydar.event.EventPriority;
 import org.glydar.paraglydar.event.Listener;
+import org.glydar.paraglydar.events.manager.HelpersEvent.CancellableEvent;
+import org.glydar.paraglydar.events.manager.HelpersEvent.DummyEvent;
+import org.glydar.paraglydar.events.manager.HelpersEvent.SubEvent;
 
 public class HelpersListener {
 

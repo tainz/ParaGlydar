@@ -1,4 +1,4 @@
-package org.glydar.api.test;
+package org.glydar.paraglydar.test;
 
 import java.util.logging.Logger;
 

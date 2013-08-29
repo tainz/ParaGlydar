@@ -1,4 +1,4 @@
-package org.glydar.api.events.manager;
+package org.glydar.paraglydar.events.manager;
 
 import org.glydar.paraglydar.plugin.Plugin;
 

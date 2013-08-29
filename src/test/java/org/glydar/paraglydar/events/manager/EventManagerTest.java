@@ -1,18 +1,18 @@
-package org.glydar.api.events.manager;
+package org.glydar.paraglydar.events.manager;
 
 import static org.junit.Assert.*;
 
-import org.glydar.api.events.manager.HelpersEvent.CancellableEvent;
-import org.glydar.api.events.manager.HelpersEvent.DummyEvent;
-import org.glydar.api.events.manager.HelpersEvent.SubEvent;
-import org.glydar.api.events.manager.HelpersListener.CallListener;
-import org.glydar.api.events.manager.HelpersListener.CancellableListener;
-import org.glydar.api.events.manager.HelpersListener.ExceptionListener;
-import org.glydar.api.events.manager.HelpersListener.PrioritiesListener;
-import org.glydar.api.test.NullLogger;
 import org.glydar.paraglydar.event.Listener;
 import org.glydar.paraglydar.event.manager.EventManager;
+import org.glydar.paraglydar.events.manager.HelpersEvent.CancellableEvent;
+import org.glydar.paraglydar.events.manager.HelpersEvent.DummyEvent;
+import org.glydar.paraglydar.events.manager.HelpersEvent.SubEvent;
+import org.glydar.paraglydar.events.manager.HelpersListener.CallListener;
+import org.glydar.paraglydar.events.manager.HelpersListener.CancellableListener;
+import org.glydar.paraglydar.events.manager.HelpersListener.ExceptionListener;
+import org.glydar.paraglydar.events.manager.HelpersListener.PrioritiesListener;
 import org.glydar.paraglydar.plugin.Plugin;
+import org.glydar.paraglydar.test.NullLogger;
 import org.junit.Before;
 import org.junit.Test;
 
