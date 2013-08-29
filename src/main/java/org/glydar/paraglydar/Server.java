@@ -12,7 +12,7 @@ import org.glydar.paraglydar.permissions.Permission;
 
 public interface Server {
 
-	EventManager getEventManager();
+	public EventManager getEventManager();
 
 	public String getName();
 

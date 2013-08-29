@@ -1,0 +1,6 @@
+key1: key1 en
+key2: key2 en
+key3: key3 en
+key4: key4 en
+
+with.args: "Message with {0} args *{1}* and *{2}*"

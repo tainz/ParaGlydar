@@ -4,11 +4,20 @@ import org.glydar.paraglydar.Server;
 import org.glydar.paraglydar.command.Command;
 import org.glydar.paraglydar.command.CommandExecutor;
 import org.glydar.paraglydar.command.CommandSender;
+import org.glydar.paraglydar.i18n.I18n;
+import org.glydar.paraglydar.i18n.I18nLoader;
+import org.glydar.paraglydar.i18n.I18nTarget;
+
+import com.google.common.collect.ImmutableList;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Locale;
+import java.util.logging.Level;
 
-public abstract class Plugin implements CommandExecutor {
+public abstract class Plugin implements CommandExecutor, I18nTarget {
 
 	private PluginLoader loader;
 	private PluginLogger logger;
@@ -39,6 +48,36 @@ public abstract class Plugin implements CommandExecutor {
 
 	public Server getServer() {
 		return server;
+	}
+
+	@Override
+	public Iterable<URL> getI18nLocations(String filename) {
+		ImmutableList.Builder<URL> builder= ImmutableList.builder();
+
+		URLClassLoader cl = loader.getClassLoader(this);
+		builder.add(cl.getResource(filename));
+
+		File userLocation = new File(getFolder(), filename);
+		if (userLocation.exists()) {
+			try {
+				builder.add(userLocation.toURI().toURL());
+			} catch (MalformedURLException exc) {
+				getLogger().log(Level.WARNING, "Unable to convert i18n filepath to an url for " + filename, exc);
+			}
+		}
+
+		return builder.build();
+	}
+
+	/**
+	 * Get an {@link I18n} instance for the given name and the locales 
+	 * defined in the server configuration. Localization files are looked for
+	 * in the jar and the config folder of this plugin.
+	 */
+	public I18n getI18n(String name) {
+		// TODO: Get locales from the server config
+		I18nLoader i18nloader = new I18nLoader(this, new Locale[0]);
+		return i18nloader.load(name);
 	}
 
 	public boolean isEnabled() {
