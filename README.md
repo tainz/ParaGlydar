@@ -9,7 +9,7 @@ Add to your parent pom.xml:
         <repository>
           <id>archiva.glydarteam</id>
           <name>Archiva Managed Glydar Repository</name>
-          <url>http://maven.craftednation.com:8080/archiva/repository/glydarteam/</url>
+          <url>http://glydar.org:8080/repository/glydarteam/</url>
         </repository>
       </repositories>
       <dependencies>
