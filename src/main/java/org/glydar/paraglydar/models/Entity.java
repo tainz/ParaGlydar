@@ -8,6 +8,8 @@ public interface Entity {
 
 	public World getWorld();
 	
+	public void changeWorld(World world);
+	
 	/**
 	 * Call this whenever you modify anything in Player.data and wish to update all of the clients.
 	 */
