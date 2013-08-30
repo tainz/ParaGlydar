@@ -6,7 +6,6 @@ import org.glydar.paraglydar.event.Cancellable;
 import org.glydar.paraglydar.event.Event;
 import org.glydar.paraglydar.models.BaseTarget;
 import org.glydar.paraglydar.models.CustomTarget;
-import org.glydar.paraglydar.models.EveryoneTarget;
 import org.glydar.paraglydar.models.Player;
 import org.glydar.paraglydar.models.WorldTarget;
 
