@@ -244,29 +244,9 @@ public interface EntityData {
 
 	public void setNu12(long nu12);
 
-	public long getNu13();
+	public Vector3<Long> getSpawnPosition();
 
-	public void setNu13(long nu13);
-
-	public long getNu14();
-
-	public void setNu14(long nu14);
-
-	public long getNu15();
-
-	public void setNu15(long nu15);
-
-	public long getNu16();
-
-	public void setNu16(long nu16);
-
-	public long getNu17();
-
-	public void setNu17(long nu17);
-
-	public long getNu18();
-
-	public void setNu18(long nu18);
+	public void setSpawnPosition(Vector3<Long> spawnPosition);
 
 	public long getNu20();
 

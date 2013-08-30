@@ -30,9 +30,9 @@ public interface Item {
 
 	public void setFlags(byte flags);
 
-	public int getLevel();
+	public short getLevel();
 
-	public void setLevel(int level);
+	public void setLevel(short level);
 
 	public ItemUpgrade[] getUpgrades();
 
