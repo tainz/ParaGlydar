@@ -1,12 +1,14 @@
 package org.glydar.paraglydar.data;
 
+import java.util.BitSet;
+
 public interface EntityData {
 
 	public long getId();
 
 	public void setId(long id);
 
-	public byte[] getBitmask();
+	public BitSet getBitSet();
 
 	public Vector3<Long> getPosition();
 
