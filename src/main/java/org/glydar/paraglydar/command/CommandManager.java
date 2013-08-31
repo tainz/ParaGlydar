@@ -16,7 +16,7 @@ public class CommandManager {
 	
 	private static final String PERMISSION_ERROR = "Sorry, you do not have permission for this command.";
 	private static final String INVALID_COMMAND = "Invalid command entered! Type /help for help!";
-	private static final String ERROR_OCCURRED = "An error occurred! Try again in a bit, maybe.";
+	private static final String ERROR_OCCURRED = "An error occurred! Please contact the server administrators.";
 	
 	public CommandManager(){}
 	
@@ -134,9 +134,7 @@ public class CommandManager {
 			if (validateArgsLength(args.length, cmd)){
 				try{	
 					CommandOutcome o = cmd.execute(cs, args);
-					ParaGlydar.getLogger().info("Command manager o: " + o.toString());
 					outcome = o;
-					ParaGlydar.getLogger().info("Command manager Outcome again: " + outcome.toString());
 				} catch (Exception exc) {
 					outcome = CommandOutcome.ERROR;
 					ParaGlydar.getLogger().log(Level.WARNING,

@@ -31,11 +31,8 @@ public class RegisteredCommand {
 	public CommandOutcome execute(CommandSender cs, String[] args){
 		CommandOutcome outcome;
 		try {
-			ParaGlydar.getLogger().info("Execute #1");
 			CommandOutcome o = (CommandOutcome) method.invoke(executor, cs, args);
-			ParaGlydar.getLogger().info("Execute #2");
 			outcome = o;
-			ParaGlydar.getLogger().info("Outcome: " + outcome.toString());
 		} catch (IllegalAccessException | IllegalArgumentException exc) {
 			outcome = CommandOutcome.ERROR;
 			throw new MethodEventExecutorException(exc);
@@ -43,7 +40,6 @@ public class RegisteredCommand {
 			outcome = CommandOutcome.ERROR;
 			throw new MethodEventExecutorException(exc.getCause());
 		}
-		ParaGlydar.getLogger().info("Outcome again: " + outcome.toString());
 		return outcome;
 		
 	}
