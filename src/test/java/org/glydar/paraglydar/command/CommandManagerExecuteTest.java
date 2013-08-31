@@ -2,6 +2,7 @@ package org.glydar.paraglydar.command;
 
 import static org.junit.Assert.*;
 
+import org.glydar.paraglydar.command.manager.CommandManager;
 import org.glydar.paraglydar.test.DummyPlugin;
 import org.glydar.paraglydar.test.NullLogger;
 import org.junit.Before;
@@ -19,7 +20,7 @@ public class CommandManagerExecuteTest {
 		this.sender = new TestCommandSender();
 		this.plugin = new DummyPlugin();
 
-		commandManager.registerCommandExecutor(plugin, new TestCommandExecutor());
+		commandManager.register(plugin, new TestCommandSet());
 	}
 
 	private CommandOutcome execute(String command, String... args) {
@@ -63,7 +64,7 @@ public class CommandManagerExecuteTest {
 	}
 }
 
-class TestCommandExecutor implements CommandExecutor {
+class TestCommandSet implements CommandSet {
 
 	@Command(name="executed")
 	public CommandOutcome executed(CommandSender sender, String[] args) {

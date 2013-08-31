@@ -21,6 +21,8 @@ public class MethodEventExecutor<E extends Event> implements EventExecutor<E> {
 		this.listener = listener;
 		this.method = method;
 		this.ignoreCancelled = annotation.ignoreCancelled();
+
+		method.setAccessible(true);
 	}
 
 	public Listener getListener() {

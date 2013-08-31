@@ -2,7 +2,7 @@ package org.glydar.paraglydar.plugin;
 
 import org.glydar.paraglydar.Server;
 import org.glydar.paraglydar.command.Command;
-import org.glydar.paraglydar.command.CommandExecutor;
+import org.glydar.paraglydar.command.CommandSet;
 import org.glydar.paraglydar.command.CommandSender;
 import org.glydar.paraglydar.i18n.I18n;
 import org.glydar.paraglydar.i18n.I18nLoader;
@@ -17,7 +17,7 @@ import java.net.URLClassLoader;
 import java.util.Locale;
 import java.util.logging.Level;
 
-public abstract class Plugin implements CommandExecutor, I18nTarget {
+public abstract class Plugin implements CommandSet, I18nTarget {
 
 	private PluginLoader loader;
 	private PluginLogger logger;
