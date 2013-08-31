@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.glydar.paraglydar.data.DataCreator;
 import org.glydar.paraglydar.models.ModelCreator;
+import org.glydar.paraglydar.plugin.PluginLoader;
 
 /**
  * Represents the Glydar API
@@ -12,6 +13,7 @@ public final class ParaGlydar {
 	private static Server s;
 	private static ModelCreator mc;
 	private static DataCreator dc;
+	private static PluginLoader pl;
 
 	/**
 	 * Static class cannot be initialized.
@@ -61,6 +63,18 @@ public final class ParaGlydar {
 	 */
 	public static ModelCreator getModelCreator() {
 		return mc;
+	}
+	
+	public static void setPluginLoader(PluginLoader pluginLoader) {
+		if (s == null) {
+			pl = pluginLoader;
+		} else {
+			getLogger().severe("Can't change the plugin loader instance!");
+		}
+	}
+	
+	public static PluginLoader getPluginLoader(){
+		return pl;
 	}
 
 	public static Logger getLogger() {

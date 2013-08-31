@@ -9,6 +9,4 @@ public interface CommandExecutor {
 		SUCCESS, NO_PERMISSION, WRONG_USAGE, ERROR, NOT_HANDLED, FAILURE_OTHER;
 	}
 
-	public CommandOutcome execute(CommandSender cs, Command cmd, String lbl, String[] args);
-
 }

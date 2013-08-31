@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 /**
  * Notes methods that handle events inside a listener
  *
- * @author YoshiGenius
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

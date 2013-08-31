@@ -154,9 +154,9 @@ public abstract class Plugin implements CommandExecutor, I18nTarget {
 		this.loader = loader;
 	}
 
-	@Override
+	/*@Override
 	public CommandOutcome execute(CommandSender cs, Command cmd, String lbl, String[] args) {
 		return CommandOutcome.NOT_HANDLED;
-	}
+	}*/
 
 }
