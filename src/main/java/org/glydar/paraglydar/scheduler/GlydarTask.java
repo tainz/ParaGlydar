@@ -3,6 +3,7 @@ package org.glydar.paraglydar.scheduler;
 import org.glydar.paraglydar.plugin.Plugin;
 
 /**
+ * GlydarTask copied from CraftTask by the Bukkit project.
  * @author YoshiGenius
  */
 class GlydarTask implements Runnable {

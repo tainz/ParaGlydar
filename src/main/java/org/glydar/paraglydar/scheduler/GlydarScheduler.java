@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 
 /**
+ * GlydarScheduler copied from CraftScheduler by the Bukkit project.
  * @author YoshiGenius
  */
 public class GlydarScheduler {
@@ -20,7 +21,7 @@ public class GlydarScheduler {
      */
     private final AtomicInteger ids = new AtomicInteger(1);
     /**
-     * Current head of linked-list. This reference is always stale, {@link CraftTask#next} is the live reference.
+     * Current head of linked-list. This reference is always stale, {@link GlydarTask#next} is the live reference.
      */
     private volatile GlydarTask head = new GlydarTask();
     /**

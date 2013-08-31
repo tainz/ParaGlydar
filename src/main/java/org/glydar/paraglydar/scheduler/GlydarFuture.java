@@ -5,6 +5,7 @@ import org.glydar.paraglydar.plugin.Plugin;
 import java.util.concurrent.*;
 
 /**
+ * GlydarFuture copied from CraftFuture by the Bukkit project.
  * @author YoshiGenius
  */
 class GlydarFuture<T> extends GlydarTask implements Future<T> {
