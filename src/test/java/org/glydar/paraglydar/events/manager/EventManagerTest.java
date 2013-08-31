@@ -12,6 +12,7 @@ import org.glydar.paraglydar.events.manager.HelpersListener.CancellableListener;
 import org.glydar.paraglydar.events.manager.HelpersListener.ExceptionListener;
 import org.glydar.paraglydar.events.manager.HelpersListener.PrioritiesListener;
 import org.glydar.paraglydar.plugin.Plugin;
+import org.glydar.paraglydar.test.DummyPlugin;
 import org.glydar.paraglydar.test.NullLogger;
 import org.junit.Before;
 import org.junit.Test;

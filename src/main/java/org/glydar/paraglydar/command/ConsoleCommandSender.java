@@ -7,10 +7,9 @@ import java.util.logging.Level;
 
 public class ConsoleCommandSender implements CommandSender {
 
-
 	@Override
 	public String getName() {
-		return "Console";
+		return "*Console*";
 	}
 
 	@Override

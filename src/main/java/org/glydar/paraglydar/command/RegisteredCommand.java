@@ -3,13 +3,12 @@ package org.glydar.paraglydar.command;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.glydar.paraglydar.ParaGlydar;
-import org.glydar.paraglydar.command.CommandExecutor.CommandOutcome;
 import org.glydar.paraglydar.event.manager.MethodEventExecutor.MethodEventExecutorException;
 import org.glydar.paraglydar.permissions.Permission;
 import org.glydar.paraglydar.plugin.Plugin;
 
-public class RegisteredCommand {	
+public class RegisteredCommand {
+
 	private Plugin plugin;
 	private CommandExecutor executor;
 	private Permission perm;
@@ -19,7 +18,7 @@ public class RegisteredCommand {
 	private int min;
 	private int max;
 	private Method method;
-	
+
 	public RegisteredCommand(Plugin plugin, String name, CommandExecutor executor, String usage, Method method) {
 		this.name = name;
 		this.executor = executor;
@@ -27,8 +26,8 @@ public class RegisteredCommand {
 		this.plugin = plugin;
 		this.method = method;
 	}
-	
-	public CommandOutcome execute(CommandSender cs, String[] args){
+
+	public CommandOutcome execute(CommandSender cs, String[] args) {
 		CommandOutcome outcome;
 		try {
 			CommandOutcome o = (CommandOutcome) method.invoke(executor, cs, args);
@@ -40,8 +39,8 @@ public class RegisteredCommand {
 			outcome = CommandOutcome.ERROR;
 			throw new MethodEventExecutorException(exc.getCause());
 		}
+
 		return outcome;
-		
 	}
 
 	public String getCommandName() {
@@ -51,7 +50,7 @@ public class RegisteredCommand {
 	public Permission getPermission() {
 		return this.perm;
 	}
-	
+
 	public RegisteredCommand setPermission(Permission perm) {
 		this.perm = perm;
 		return this;
@@ -82,17 +81,17 @@ public class RegisteredCommand {
 			return this;
 		}
 	}
-	
-	public void setMinMax(int min, int max){
+
+	public void setMinMax(int min, int max) {
 		this.min = min;
 		this.max = max;
 	}
-	
-	public int getMinArguments(){
+
+	public int getMinArguments() {
 		return min;
 	}
-	
-	public int getMaxArguments(){
+
+	public int getMaxArguments() {
 		return max;
 	}
 }
