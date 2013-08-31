@@ -66,7 +66,7 @@ public final class ParaGlydar {
 	}
 	
 	public static void setPluginLoader(PluginLoader pluginLoader) {
-		if (s == null) {
+		if (pl == null) {
 			pl = pluginLoader;
 		} else {
 			getLogger().severe("Can't change the plugin loader instance!");
