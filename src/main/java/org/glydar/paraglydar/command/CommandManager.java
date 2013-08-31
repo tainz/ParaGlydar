@@ -135,7 +135,9 @@ public class CommandManager {
 			if (validateArgsLength(args.length, cmd)){
 				try{	
 					CommandOutcome o = cmd.execute(cs, args);
+					ParaGlydar.getLogger().info("Command manager o: " + o.toString());
 					outcome = o;
+					ParaGlydar.getLogger().info("Command manager Outcome again: " + outcome.toString());
 				} catch (Exception exc) {
 					error = true;
 					ParaGlydar.getLogger().log(Level.WARNING,
