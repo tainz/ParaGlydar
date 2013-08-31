@@ -17,9 +17,7 @@ public @interface Command {
 
 	public String usage() default "";
 
-	int min() default 0;
-
-	int max() default Integer.MAX_VALUE;
+	int maxArgs() default Integer.MAX_VALUE;
 
 	public String permission() default "";
 

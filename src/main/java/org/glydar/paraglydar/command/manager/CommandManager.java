@@ -71,8 +71,8 @@ public class CommandManager {
 		}
 
 		Class<?>[] parameterTypes = m.getParameterTypes();
-		if (parameterTypes.length != 2) {
-			logInvalidCommandMethod(m, "does not have the required (2) parameters");
+		if (parameterTypes.length == 0) {
+			logInvalidCommandMethod(m, "does not have the required (more than 0) parameters number");
 			return false;
 		}
 
@@ -81,10 +81,23 @@ public class CommandManager {
 			return false;
 		}
 
-		if (parameterTypes[1] != String[].class) {
-			logInvalidCommandMethod(m, "does not have 'String[]' as it's second parameter");
-			return false;
+		// Check mandatory argument parameters
+		for (int i = 1; i < parameterTypes.length - 1; i++) {
+			if (parameterTypes[i] != String.class) {
+				logInvalidCommandMethod(m, "does not have 'String' as a mandatory parameter at index " + i);
+				return false;
+			}
 		}
+
+		// Check last parameter (mandatory or rest) parameter
+		if (parameterTypes.length > 1) {
+			Class<?> lastParameterType = parameterTypes[parameterTypes.length - 1];
+			if (lastParameterType != String.class && lastParameterType != String[].class) {
+				logInvalidCommandMethod(m, "does not have 'String' or 'String[]' as it's last parameter");
+				return false;
+			}
+		}
+
 		return true;
 	}
 
