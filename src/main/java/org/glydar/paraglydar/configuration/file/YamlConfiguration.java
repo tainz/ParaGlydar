@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.logging.Level;
 
-import org.apache.commons.lang.Validate;
 import org.glydar.paraglydar.ParaGlydar;
 import org.glydar.paraglydar.configuration.Configuration;
 import org.glydar.paraglydar.configuration.ConfigurationSection;
@@ -16,6 +15,8 @@ import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.error.YAMLException;
 import org.yaml.snakeyaml.representer.Representer;
+
+import com.google.common.base.Preconditions;
 
 /**
  * An implementation of {@link Configuration} which saves all files in Yaml.
@@ -46,7 +47,7 @@ public class YamlConfiguration extends FileConfiguration {
 
 	@Override
 	public void loadFromString(String contents) throws InvalidConfigurationException {
-		Validate.notNull(contents, "Contents cannot be null");
+		Preconditions.checkNotNull(contents, "Contents cannot be null");
 
 		Map<?, ?> input;
 		try {
@@ -167,7 +168,7 @@ public class YamlConfiguration extends FileConfiguration {
 	 * @throws IllegalArgumentException Thrown if file is null
 	 */
 	public static YamlConfiguration loadConfiguration(File file) {
-		Validate.notNull(file, "File cannot be null");
+		Preconditions.checkNotNull(file, "File cannot be null");
 
 		YamlConfiguration config = new YamlConfiguration();
 
@@ -194,7 +195,7 @@ public class YamlConfiguration extends FileConfiguration {
 	 * @throws IllegalArgumentException Thrown if stream is null
 	 */
 	public static YamlConfiguration loadConfiguration(InputStream stream) {
-		Validate.notNull(stream, "Stream cannot be null");
+		Preconditions.checkNotNull(stream, "Stream cannot be null");
 
 		YamlConfiguration config = new YamlConfiguration();
 

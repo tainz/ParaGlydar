@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 
 /**
  * A type of {@link ConfigurationSection} that is stored in memory.
@@ -48,14 +48,14 @@ public class MemorySection implements ConfigurationSection {
 	 * @throws IllegalArgumentException Thrown is parent or path is null, or if parent contains no root Configuration.
 	 */
 	protected MemorySection(ConfigurationSection parent, String path) {
-		Validate.notNull(parent, "Parent cannot be null");
-		Validate.notNull(path, "Path cannot be null");
+		Preconditions.checkNotNull(parent, "Parent cannot be null");
+		Preconditions.checkNotNull(path, "Path cannot be null");
 
 		this.path = path;
 		this.parent = parent;
 		this.root = parent.getRoot();
 
-		Validate.notNull(root, "Path cannot be orphaned");
+		Preconditions.checkNotNull(root, "Path cannot be orphaned");
 
 		this.fullPath = createPath(parent, path);
 	}
@@ -126,7 +126,7 @@ public class MemorySection implements ConfigurationSection {
 	}
 
 	public void addDefault(String path, Object value) {
-		Validate.notNull(path, "Path cannot be null");
+		Preconditions.checkNotNull(path, "Path cannot be null");
 
 		Configuration root = getRoot();
 		if (root == null) {
@@ -152,7 +152,7 @@ public class MemorySection implements ConfigurationSection {
 	}
 
 	public void set(String path, Object value) {
-		Validate.notEmpty(path, "Cannot set to an empty path");
+		Preconditions.checkArgument(!path.isEmpty(), "Cannot set to an empty path");
 
 		Configuration root = getRoot();
 		if (root == null) {
@@ -191,7 +191,7 @@ public class MemorySection implements ConfigurationSection {
 	}
 
 	public Object get(String path, Object def) {
-		Validate.notNull(path, "Path cannot be null");
+		Preconditions.checkArgument(!path.isEmpty(), "Path cannot be null");
 
 		if (path.length() == 0) {
 			return this;
@@ -223,7 +223,7 @@ public class MemorySection implements ConfigurationSection {
 	}
 
 	public ConfigurationSection createSection(String path) {
-		Validate.notEmpty(path, "Cannot create section at empty path");
+		Preconditions.checkArgument(!path.isEmpty(), "Cannot create section at empty path");
 		Configuration root = getRoot();
 		if (root == null) {
 			throw new IllegalStateException("Cannot create section without a root");
@@ -629,7 +629,7 @@ public class MemorySection implements ConfigurationSection {
 	}
 
 	protected Object getDefault(String path) {
-		Validate.notNull(path, "Path cannot be null");
+		Preconditions.checkNotNull(path, "Path cannot be null");
 
 		Configuration root = getRoot();
 		Configuration defaults = root == null ? null : root.getDefaults();
@@ -703,7 +703,7 @@ public class MemorySection implements ConfigurationSection {
 	 * @return Full path of the section from its root.
 	 */
 	public static String createPath(ConfigurationSection section, String key, ConfigurationSection relativeTo) {
-		Validate.notNull(section, "Cannot create path without a section");
+		Preconditions.checkNotNull(section, "Cannot create path without a section");
 		Configuration root = section.getRoot();
 		if (root == null) {
 			throw new IllegalStateException("Cannot create path without a root");

@@ -1,8 +1,7 @@
 package org.glydar.paraglydar.configuration.file;
 
+import com.google.common.base.Preconditions;
 import com.google.common.io.Files;
-
-import org.apache.commons.lang.Validate;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -49,7 +48,7 @@ public abstract class FileConfiguration extends MemoryConfiguration {
 	 * @throws IllegalArgumentException Thrown when file is null.
 	 */
 	public void save(File file) throws IOException {
-		Validate.notNull(file, "File cannot be null");
+		Preconditions.checkNotNull(file, "File cannot be null");
 
 		Files.createParentDirs(file);
 
@@ -75,7 +74,7 @@ public abstract class FileConfiguration extends MemoryConfiguration {
 	 * @throws IllegalArgumentException Thrown when file is null.
 	 */
 	public void save(String file) throws IOException {
-		Validate.notNull(file, "File cannot be null");
+		Preconditions.checkNotNull(file, "File cannot be null");
 
 		save(new File(file));
 	}
@@ -102,7 +101,7 @@ public abstract class FileConfiguration extends MemoryConfiguration {
 	 * @throws IllegalArgumentException      Thrown when file is null.
 	 */
 	public void load(File file) throws FileNotFoundException, IOException, InvalidConfigurationException {
-		Validate.notNull(file, "File cannot be null");
+		Preconditions.checkNotNull(file, "File cannot be null");
 
 		load(new FileInputStream(file));
 	}
@@ -119,7 +118,7 @@ public abstract class FileConfiguration extends MemoryConfiguration {
 	 * @throws IllegalArgumentException      Thrown when stream is null.
 	 */
 	public void load(InputStream stream) throws IOException, InvalidConfigurationException {
-		Validate.notNull(stream, "Stream cannot be null");
+		Preconditions.checkNotNull(stream, "Stream cannot be null");
 
 		InputStreamReader reader = new InputStreamReader(stream);
 		StringBuilder builder = new StringBuilder();
@@ -155,7 +154,7 @@ public abstract class FileConfiguration extends MemoryConfiguration {
 	 * @throws IllegalArgumentException      Thrown when file is null.
 	 */
 	public void load(String file) throws FileNotFoundException, IOException, InvalidConfigurationException {
-		Validate.notNull(file, "File cannot be null");
+		Preconditions.checkNotNull(file, "File cannot be null");
 
 		load(new File(file));
 	}
