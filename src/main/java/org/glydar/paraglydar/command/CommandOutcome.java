@@ -8,6 +8,8 @@ public enum CommandOutcome {
 
 	WRONG_USAGE,
 
+	UNSUPPORTED_SENDER,
+
 	ERROR,
 
 	NOT_HANDLED,

@@ -52,6 +52,10 @@ public class MethodCommandExecutor implements CommandExecutor {
 
 	@Override
 	public CommandOutcome execute(CommandSender sender, String[] args) {
+		if (!method.getParameterTypes()[0].isAssignableFrom(sender.getClass())) {
+			return CommandOutcome.UNSUPPORTED_SENDER;
+		}
+
 		CommandOutcome outcome;
 		try {
 			outcome = (CommandOutcome) method.invoke(instance, sender, args);

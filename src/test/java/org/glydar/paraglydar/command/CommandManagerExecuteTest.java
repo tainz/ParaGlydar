@@ -3,6 +3,7 @@ package org.glydar.paraglydar.command;
 import static org.junit.Assert.*;
 
 import org.glydar.paraglydar.command.manager.CommandManager;
+import org.glydar.paraglydar.models.Player;
 import org.glydar.paraglydar.test.DummyPlugin;
 import org.glydar.paraglydar.test.NullLogger;
 import org.junit.Before;
@@ -62,6 +63,20 @@ public class CommandManagerExecuteTest {
 
 		assertEquals(CommandOutcome.NO_PERMISSION, outcome);
 	}
+
+	@Test
+	public void testPlayerOnly() {
+		CommandOutcome outcome = execute("player");
+
+		assertEquals(CommandOutcome.UNSUPPORTED_SENDER, outcome);
+	}
+
+	@Test
+	public void testTestSenderOnly() {
+		CommandOutcome outcome = execute("testsender");
+
+		assertEquals(CommandOutcome.SUCCESS, outcome);
+	}
 }
 
 class TestCommandSet implements CommandSet {
@@ -83,6 +98,16 @@ class TestCommandSet implements CommandSet {
 
 	@Command(name="permission", permission = "testpermission")
 	public CommandOutcome permission(CommandSender sender, String[] args) {
+		return CommandOutcome.SUCCESS;
+	}
+
+	@Command(name="player")
+	public CommandOutcome player(Player sender, String[] args) {
+		return CommandOutcome.SUCCESS;
+	}
+
+	@Command(name="testsender")
+	public CommandOutcome testsender(TestCommandSender sender, String[] args) {
 		return CommandOutcome.SUCCESS;
 	}
 }

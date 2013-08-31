@@ -19,6 +19,7 @@ public class CommandManager {
 	private static final String PERMISSION_ERROR = "Sorry, you do not have permission for this command.";
 	private static final String INVALID_COMMAND = "Invalid command entered! Type /help for help!";
 	private static final String ERROR_OCCURRED = "An error occurred! Please contact the server administrators.";
+	private static final String UNSUPPORTED_SENDER_ERROR = "";
 
 	private final Logger logger;
 	private final Map<String, RegisteredCommand> commands;
@@ -75,8 +76,8 @@ public class CommandManager {
 			return false;
 		}
 
-		if (parameterTypes[0] != CommandSender.class) {
-			logInvalidCommandMethod(m, "does not have 'CommandSender' as it's first parameter");
+		if (!CommandSender.class.isAssignableFrom(parameterTypes[0])) {
+			logInvalidCommandMethod(m, "does not have a subclass of 'CommandSender' as it's first parameter");
 			return false;
 		}
 
@@ -130,6 +131,9 @@ public class CommandManager {
 			break;
 		case WRONG_USAGE:
 			cs.sendMessage(cmd.getUsage());
+			break;
+		case UNSUPPORTED_SENDER:
+			cs.sendMessage(UNSUPPORTED_SENDER_ERROR);
 			break;
 		case ERROR:
 			cs.sendMessage(ERROR_OCCURRED);
