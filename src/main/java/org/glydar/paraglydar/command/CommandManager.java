@@ -130,7 +130,6 @@ public class CommandManager {
 	//TODO: This feels a bit messy :P
 	private void handleOutcome(CommandSender cs, String[] args, RegisteredCommand cmd){
 		CommandOutcome outcome = null;
-		boolean error = false;
 		if (cs.hasPermission(cmd.getPermission())){
 			if (validateArgsLength(args.length, cmd)){
 				try{	
@@ -139,12 +138,9 @@ public class CommandManager {
 					outcome = o;
 					ParaGlydar.getLogger().info("Command manager Outcome again: " + outcome.toString());
 				} catch (Exception exc) {
-					error = true;
+					outcome = CommandOutcome.ERROR;
 					ParaGlydar.getLogger().log(Level.WARNING,
 							"Exception thrown in Event handler", exc);
-				}
-				if (error){
-					outcome = CommandOutcome.ERROR;
 				}
 			} else {
 				outcome = CommandOutcome.WRONG_USAGE;
