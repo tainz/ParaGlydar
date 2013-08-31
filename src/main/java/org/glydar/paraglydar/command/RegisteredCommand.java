@@ -3,6 +3,7 @@ package org.glydar.paraglydar.command;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.glydar.paraglydar.ParaGlydar;
 import org.glydar.paraglydar.command.CommandExecutor.CommandOutcome;
 import org.glydar.paraglydar.event.manager.MethodEventExecutor.MethodEventExecutorException;
 import org.glydar.paraglydar.permissions.Permission;
@@ -31,8 +32,11 @@ public class RegisteredCommand {
 		CommandOutcome outcome;
 		boolean error = false;
 		try {
+			ParaGlydar.getLogger().info("Execute #1");
 			CommandOutcome o = (CommandOutcome) method.invoke(executor, cs, args);
+			ParaGlydar.getLogger().info("Execute #2");
 			outcome = o;
+			ParaGlydar.getLogger().info("Outcome: " + o.toString());
 		} catch (IllegalAccessException | IllegalArgumentException exc) {
 			error = true;
 			throw new MethodEventExecutorException(exc);

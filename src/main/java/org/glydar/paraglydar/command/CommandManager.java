@@ -104,6 +104,7 @@ public class CommandManager {
 		//TODO: Currently only first command in array of commands is used
 		for (RegisteredCommand cmd : commands){
 			if (cmd.getCommandName().equalsIgnoreCase(name)){
+				ParaGlydar.getLogger().info("Handling valid command");
 				handleOutcome(cs, args, cmd);
 				return;
 			}
