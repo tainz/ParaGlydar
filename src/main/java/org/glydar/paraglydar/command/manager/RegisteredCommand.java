@@ -9,14 +9,20 @@ public class RegisteredCommand {
 
 	private final Plugin plugin;
 	private final CommandExecutor executor;
+	private final boolean isAlias;
 
-	public RegisteredCommand(Plugin plugin, CommandExecutor executor) {
+	public RegisteredCommand(Plugin plugin, CommandExecutor executor, boolean isAlias) {
 		this.plugin = plugin;
 		this.executor = executor;
+		this.isAlias = isAlias;
 	}
 
 	public Plugin getPlugin() {
 		return plugin;
+	}
+
+	public boolean isAlias() {
+		return isAlias;
 	}
 
 	public String getUsage() {

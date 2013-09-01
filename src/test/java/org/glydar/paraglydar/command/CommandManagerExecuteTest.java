@@ -69,6 +69,22 @@ public class CommandManagerExecuteTest {
 	}
 
 	@Test
+	public void testCallWithPluginPrefix() {
+		register(new TestCommandSet());
+		CommandOutcome outcome = execute("dummyplugin", "executed");
+
+		assertEquals(CommandOutcome.SUCCESS, outcome);
+	}
+
+	@Test
+	public void testConflict() {
+		register(new TestCommandSet());
+		CommandOutcome outcome = execute("conflict");
+
+		assertEquals(CommandOutcome.SUCCESS, outcome);
+	}
+
+	@Test
 	public void testPermission() {
 		register(new TestCommandSet());
 		sender.blackListPermission("testpermission");
@@ -127,7 +143,7 @@ public class CommandManagerExecuteTest {
 	}
 
 	@Test
-	public void testMandotoryRestArgs() {
+	public void testMandatoryRestArgs() {
 		TestCommandSet commands = register(new TestCommandSet());
 		CommandOutcome outcome = execute("mandatoryrest", "arg1", "arg2", "arg3", "arg4");
 

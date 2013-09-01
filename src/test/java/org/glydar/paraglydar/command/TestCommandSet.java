@@ -23,6 +23,16 @@ public class TestCommandSet implements CommandSet {
 		return CommandOutcome.SUCCESS;
 	}
 
+	@Command(name="withalias", aliases = "conflict")
+	public CommandOutcome withalias(CommandSender sender, String... args) {
+		return CommandOutcome.ERROR;
+	}
+
+	@Command(name="conflict")
+	public CommandOutcome conflict(CommandSender sender, String... args) {
+		return CommandOutcome.SUCCESS;
+	}
+
 	@Command(name="permission", permission = "testpermission")
 	public CommandOutcome permission(CommandSender sender, String... args) {
 		return CommandOutcome.SUCCESS;

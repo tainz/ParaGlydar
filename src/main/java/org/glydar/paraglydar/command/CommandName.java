@@ -2,6 +2,8 @@ package org.glydar.paraglydar.command;
 
 import java.util.Arrays;
 
+import org.glydar.paraglydar.plugin.Plugin;
+
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 
@@ -13,7 +15,7 @@ public final class CommandName {
 
 	public static CommandName of(String... arg) {
 		String[] parts = new String[arg.length];
-		checkAndAddParts(arg, parts, 0);
+		checkAndAddParts(parts, 0, arg);
 		return new CommandName(parts);
 	}
 
@@ -39,10 +41,24 @@ public final class CommandName {
 		return new CommandName(parentParts);
 	}
 
+	public CommandName getPluginPrefixed(Plugin plugin) {
+		String[] prefixedParts = new String[parts.length + 1];
+		prefixedParts[0] = plugin.getName().toLowerCase();
+		System.arraycopy(parts, 0, prefixedParts, 1, parts.length);
+		return new CommandName(prefixedParts);
+	}
+
+	public CommandName getAlias(String alias) {
+		String[] aliasParts = new String[parts.length];
+		System.arraycopy(parts, 0, aliasParts, 0, aliasParts.length - 1);
+		checkAndAddParts(aliasParts, aliasParts.length - 1, alias);
+		return new CommandName(aliasParts);
+	}
+
 	public CommandName getChild(String... arg) {
 		String[] childParts = new String[parts.length + arg.length];
 		System.arraycopy(parts, 0, childParts, 0, parts.length);
-		checkAndAddParts(arg, childParts, parts.length);
+		checkAndAddParts(childParts, parts.length, arg);
 		return new CommandName(childParts);
 	}
 
@@ -66,7 +82,7 @@ public final class CommandName {
 		return Arrays.equals(parts, other.parts);
 	}
 
-	private static String[] checkAndAddParts(String[] src, String[] dest, int from) {
+	private static String[] checkAndAddParts(String[] dest, int from, String... src) {
 		Preconditions.checkElementIndex(0, src.length, "Parts cannot be empty");
 		for (int i = 0; i < dest.length; i++) {
 			Preconditions.checkNotNull(src[i], "Command name parts cannot be null");

@@ -110,20 +110,43 @@ public class CommandManager {
 
 	private void registerMethodCommand(Plugin plugin, CommandSet instance, Method method, Command annotation) {
 		MethodCommandExecutor executor = new MethodCommandExecutor(instance, method, annotation);
-		register(plugin, annotation.name(), executor);
+		register(plugin, annotation.name(), annotation.aliases(), executor);
 	}
 
 	public void register(Plugin plugin, String[] name, CommandExecutor executor) {
-		register(plugin, CommandName.of(name), executor);
+		register(plugin, name, new String[0], executor);
 	}
 
-	public void register(Plugin plugin, CommandName name, CommandExecutor executor) {
-		if (commands.containsKey(name)) {
-			logger.log(Level.WARNING, "Tried to register command `{0}` which is already registered", name);
-			return;
+	public void register(Plugin plugin, String[] nameArray, String[] aliases, CommandExecutor executor) {
+		CommandName name = CommandName.of(nameArray);
+		register(plugin, name.getPluginPrefixed(plugin), executor, true, false);
+		register(plugin, name, executor, false, false);
+		for (String aliasPart : aliases) {
+			CommandName alias = name.getAlias(aliasPart);
+			register(plugin, alias, executor, false, true);
+		}
+	}
+
+	private void register(Plugin plugin, CommandName name, CommandExecutor executor, boolean isPluginPrefixed, boolean isAlias) {
+		RegisteredCommand command = commands.get(name);
+		// Check for conflict
+		if (command != null) {
+			if (isPluginPrefixed) {
+				logger.log(Level.WARNING, "Overriding existing command with plugin prefixed one", name);
+			}
+			else {
+				// New command is an alias or old one is not, skip registration and log conflict
+				if (isAlias || !command.isAlias()) {
+					logger.log(Level.WARNING, "Tried to register command `{0}` which is already registered", name);
+					return;
+				}
+
+				// Old command is an alias and the new one is not, it we be replaced
+				logger.log(Level.WARNING, "Replacing aliased command with main command {0}", name);
+			}
 		}
 
-		RegisteredCommand command = new RegisteredCommand(plugin, executor);
+		command = new RegisteredCommand(plugin, executor, false);
 		commands.put(name, command);
 	}
 
