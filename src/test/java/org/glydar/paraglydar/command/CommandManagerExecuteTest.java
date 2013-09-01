@@ -17,8 +17,8 @@ public class CommandManagerExecuteTest {
 	@Before
 	public void setUp() {
 		this.commandManager = new CommandManager(new NullLogger());
-		this.sender = new TestCommandSender();
 		this.plugin = new DummyPlugin();
+		this.sender = new TestCommandSender();
 	}
 
 	private <S extends CommandSet> S register(S set) {
@@ -26,8 +26,8 @@ public class CommandManagerExecuteTest {
 		return set;
 	}
 
-	private CommandOutcome execute(String command, String... args) {
-		return commandManager.execute(sender, command, args);
+	private CommandOutcome execute(String... args) {
+		return commandManager.execute(sender, args);
 	}
 
 	@Test
@@ -36,6 +36,12 @@ public class CommandManagerExecuteTest {
 		CommandOutcome outcome = execute("noSuchCommandShouldEverExist");
 
 		assertEquals(CommandOutcome.NOT_HANDLED, outcome);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testRaiseExceptionWithEmptyArgs() {
+		register(new TestCommandSet());
+		execute("executed", "");
 	}
 
 	@Test
@@ -55,10 +61,18 @@ public class CommandManagerExecuteTest {
 	}
 
 	@Test
+	public void testNestedCommand() {
+		register(new TestCommandSet());
+		CommandOutcome outcome = execute("nested", "command");
+
+		assertEquals(CommandOutcome.SUCCESS, outcome);
+	}
+
+	@Test
 	public void testPermission() {
 		register(new TestCommandSet());
 		sender.blackListPermission("testpermission");
-		CommandOutcome outcome = execute("permission", "arg1");
+		CommandOutcome outcome = execute("permission");
 
 		assertEquals(CommandOutcome.NO_PERMISSION, outcome);
 	}

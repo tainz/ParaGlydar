@@ -9,10 +9,13 @@ import java.util.logging.Logger;
 
 import org.glydar.paraglydar.command.Command;
 import org.glydar.paraglydar.command.CommandExecutor;
+import org.glydar.paraglydar.command.CommandName;
 import org.glydar.paraglydar.command.CommandOutcome;
 import org.glydar.paraglydar.command.CommandSender;
 import org.glydar.paraglydar.command.CommandSet;
 import org.glydar.paraglydar.plugin.Plugin;
+
+import com.google.common.base.Preconditions;
 
 public class CommandManager {
 
@@ -22,7 +25,7 @@ public class CommandManager {
 	private static final String UNSUPPORTED_SENDER_ERROR = "";
 
 	private final Logger logger;
-	private final Map<String, RegisteredCommand> commands;
+	private final Map<CommandName, RegisteredCommand> commands;
 
 	public CommandManager(Logger logger) {
 		this.logger = logger;
@@ -110,8 +113,11 @@ public class CommandManager {
 		register(plugin, annotation.name(), executor);
 	}
 
-	public void register(Plugin plugin, String nameArg, CommandExecutor executor) {
-		String name = nameArg.toLowerCase();
+	public void register(Plugin plugin, String[] name, CommandExecutor executor) {
+		register(plugin, CommandName.of(name), executor);
+	}
+
+	public void register(Plugin plugin, CommandName name, CommandExecutor executor) {
 		if (commands.containsKey(name)) {
 			logger.log(Level.WARNING, "Tried to register command `{0}` which is already registered", name);
 			return;
@@ -121,17 +127,52 @@ public class CommandManager {
 		commands.put(name, command);
 	}
 
-	public CommandOutcome execute(CommandSender cs, String name, String... args) {
-		RegisteredCommand cmd = commands.get(name.toLowerCase());
+	public CommandOutcome execute(CommandSender sender, String commandLine) {
+		return execute(sender, commandLine.split(" +"));
+	}
+
+	public CommandOutcome execute(CommandSender sender, String... args) {
+		CommandName name = CommandName.of(args);
+		while (true) {
+			RegisteredCommand cmd = commands.get(name);
+			if (cmd != null) {
+				String[] realArgs = new String[args.length - name.size()];
+				System.arraycopy(args, name.size(), realArgs, 0, realArgs.length);
+				return doExecute(sender, cmd, realArgs);
+			}
+
+			if (name.hasParent()) {
+				name = name.getParent();
+			}
+			else {
+				break;
+			}
+		}
+
+		sender.sendMessage(INVALID_COMMAND);
+		return CommandOutcome.NOT_HANDLED;
+	}
+
+	public CommandOutcome execute(CommandSender sender, CommandName name, String... args) {
+		for (String arg : args) {
+			Preconditions.checkNotNull(arg);
+			Preconditions.checkArgument(!arg.isEmpty());
+		}
+
+		RegisteredCommand cmd = commands.get(name);
 		if (cmd == null) {
-			cs.sendMessage(INVALID_COMMAND);
+			sender.sendMessage(INVALID_COMMAND);
 			return CommandOutcome.NOT_HANDLED;
 		}
 
+		return doExecute(sender, cmd, args);
+	}
+
+	private CommandOutcome doExecute(CommandSender sender, RegisteredCommand cmd, String... args) {
 		logger.info("Handling valid command");
 		CommandOutcome outcome;
 		try {
-			outcome = cmd.execute(cs, args);
+			outcome = cmd.execute(sender, args);
 		} catch (Exception exc) {
 			outcome = CommandOutcome.ERROR;
 			logger.log(Level.WARNING, "Exception thrown in Event handler", exc);
@@ -141,24 +182,24 @@ public class CommandManager {
 		case SUCCESS:
 			break;
 		case NO_PERMISSION:
-			cs.sendMessage(PERMISSION_ERROR);
+			sender.sendMessage(PERMISSION_ERROR);
 			break;
 		case WRONG_USAGE:
-			cs.sendMessage(cmd.getUsage());
+			sender.sendMessage(cmd.getUsage());
 			break;
 		case UNSUPPORTED_SENDER:
-			cs.sendMessage(UNSUPPORTED_SENDER_ERROR);
+			sender.sendMessage(UNSUPPORTED_SENDER_ERROR);
 			break;
 		case ERROR:
-			cs.sendMessage(ERROR_OCCURRED);
+			sender.sendMessage(ERROR_OCCURRED);
 			break;
 		case NOT_HANDLED:
-			cs.sendMessage(ERROR_OCCURRED);
+			sender.sendMessage(ERROR_OCCURRED);
 			// Commands shouldn't return this
 			outcome = CommandOutcome.FAILURE_OTHER;
 			break;
 		case FAILURE_OTHER:
-			cs.sendMessage(ERROR_OCCURRED);
+			sender.sendMessage(ERROR_OCCURRED);
 			break;
 		}
 

@@ -11,7 +11,7 @@ import org.glydar.paraglydar.permissions.Permission.PermissionDefault;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Command {
 
-	public String name();
+	public String[] name();
 
 	public String[] aliases() default {};
 

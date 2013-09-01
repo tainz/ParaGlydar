@@ -18,6 +18,11 @@ public class TestCommandSet implements CommandSet {
 		return CommandOutcome.SUCCESS;
 	}
 
+	@Command(name={"nested", "command"})
+	public CommandOutcome nestedCommand(CommandSender sender, String... args) {
+		return CommandOutcome.SUCCESS;
+	}
+
 	@Command(name="permission", permission = "testpermission")
 	public CommandOutcome permission(CommandSender sender, String... args) {
 		return CommandOutcome.SUCCESS;
