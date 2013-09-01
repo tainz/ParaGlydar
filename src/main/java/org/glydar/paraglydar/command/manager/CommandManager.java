@@ -110,7 +110,8 @@ public class CommandManager {
 		register(plugin, annotation.name(), executor);
 	}
 
-	public void register(Plugin plugin, String name, CommandExecutor executor) {
+	public void register(Plugin plugin, String nameArg, CommandExecutor executor) {
+		String name = nameArg.toLowerCase();
 		if (commands.containsKey(name)) {
 			logger.log(Level.WARNING, "Tried to register command `{0}` which is already registered", name);
 			return;
@@ -121,7 +122,7 @@ public class CommandManager {
 	}
 
 	public CommandOutcome execute(CommandSender cs, String name, String... args) {
-		RegisteredCommand cmd = commands.get(name);
+		RegisteredCommand cmd = commands.get(name.toLowerCase());
 		if (cmd == null) {
 			cs.sendMessage(INVALID_COMMAND);
 			return CommandOutcome.NOT_HANDLED;
