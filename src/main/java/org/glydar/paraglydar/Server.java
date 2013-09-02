@@ -49,4 +49,14 @@ public interface Server {
 	
 	public void debug(String message);
 	
+	public int getMaxPlayers();
+	
+	public boolean isPVPAllowed();
+
+	public void setPVPAllowed(boolean allowPVP);
+	
+	public void setMaxPlayers(int maxPlayers);
+	
+	public int getPort();
+	
 }
