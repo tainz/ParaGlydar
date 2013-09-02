@@ -1,14 +1,19 @@
 package org.glydar.paraglydar.scheduler;
 
-import org.apache.commons.lang.Validate;
-import org.glydar.paraglydar.ParaGlydar;
-import org.glydar.paraglydar.plugin.Plugin;
-
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
+
+import org.apache.commons.lang.Validate;
+import org.glydar.paraglydar.plugin.Plugin;
 
 /**
  * GlydarScheduler copied from CraftScheduler by the Bukkit project.
@@ -46,7 +51,6 @@ public class GlydarScheduler {
      */
     private final ConcurrentHashMap<Integer, GlydarTask> runners = new ConcurrentHashMap<Integer, GlydarTask>();
     private volatile int currentTick = -1;
-    private final Executor executor = Executors.newCachedThreadPool();
     private static final int RECENT_TICKS;
 
     static {

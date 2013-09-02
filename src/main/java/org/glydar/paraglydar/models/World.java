@@ -20,4 +20,7 @@ public interface World {
 	public String getName();
 	
 	public void broadcastMessage(String message);
+	
+	public boolean isPVPAllowed();
+	
 }

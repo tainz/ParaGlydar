@@ -1,7 +1,7 @@
 package org.glydar.paraglydar;
 
 import java.util.Collection;
-import java.util.Map;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.glydar.paraglydar.command.manager.CommandManager;
@@ -31,7 +31,7 @@ public interface Server {
 	
 	public World getDefaultWorld();
 	
-	public Map<Long,World> getWorlds();
+	public List<World> getWorlds();
 
 	public Logger getLogger();
 
@@ -50,10 +50,6 @@ public interface Server {
 	public void debug(String message);
 	
 	public int getMaxPlayers();
-	
-	public boolean isPVPAllowed();
-
-	public void setPVPAllowed(boolean allowPVP);
 	
 	public void setMaxPlayers(int maxPlayers);
 	
