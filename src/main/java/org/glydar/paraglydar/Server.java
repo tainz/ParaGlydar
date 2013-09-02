@@ -44,4 +44,9 @@ public interface Server {
 	public void broadcast(String message, String permission);
 
 	public void broadcast(String message, Permission permission);
+	
+	public boolean isDebugging();
+	
+	public void debug(String message);
+	
 }
