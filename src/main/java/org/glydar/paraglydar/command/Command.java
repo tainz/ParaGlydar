@@ -7,6 +7,9 @@ import java.lang.annotation.Target;
 
 import org.glydar.paraglydar.permissions.Permission.PermissionDefault;
 
+/**
+ * Notes methods which define commands
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Command {

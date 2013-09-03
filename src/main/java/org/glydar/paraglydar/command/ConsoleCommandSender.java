@@ -5,6 +5,9 @@ import org.glydar.paraglydar.permissions.Permission;
 
 import java.util.logging.Level;
 
+/**
+ * Represents a {@link CommandSender} for the console input.
+ */
 public class ConsoleCommandSender implements CommandSender {
 
 	@Override
