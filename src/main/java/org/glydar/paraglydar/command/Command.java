@@ -21,5 +21,5 @@ public @interface Command {
 
 	public String permission() default "";
 
-	public PermissionDefault permissionDefault() default PermissionDefault.TRUE;
+	public PermissionDefault permissionDefault() default PermissionDefault.ADMIN;
 }
