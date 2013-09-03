@@ -15,7 +15,7 @@ public interface Entity {
 	 */
 	public void forceUpdateData();
 
-	public void forceUpdateData(EntityData ed);
+	public void forceUpdateData(boolean fullUpdate);
 
 	public EntityData getEntityData();
 
