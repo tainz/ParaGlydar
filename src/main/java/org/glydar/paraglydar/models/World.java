@@ -23,4 +23,5 @@ public interface World {
 	
 	public boolean isPVPAllowed();
 	
+	public void setPVPAllowed(boolean allowPvP);
 }
