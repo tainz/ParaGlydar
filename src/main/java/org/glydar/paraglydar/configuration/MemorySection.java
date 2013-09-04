@@ -191,7 +191,7 @@ public class MemorySection implements ConfigurationSection {
 	}
 
 	public Object get(String path, Object def) {
-		Preconditions.checkArgument(!path.isEmpty(), "Path cannot be null");
+		Preconditions.checkNotNull(path, "Path cannot be null");
 
 		if (path.length() == 0) {
 			return this;
