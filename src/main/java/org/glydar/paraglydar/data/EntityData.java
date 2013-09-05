@@ -2,6 +2,9 @@ package org.glydar.paraglydar.data;
 
 import java.util.BitSet;
 
+import org.glydar.paraglydar.geom.FloatVector3;
+import org.glydar.paraglydar.geom.LongVector3;
+
 public interface EntityData {
 
 	public long getId();
@@ -10,9 +13,9 @@ public interface EntityData {
 
 	public BitSet getBitSet();
 
-	public Vector3<Long> getPosition();
+	public LongVector3 getPosition();
 
-	public void setPosition(Vector3<Long> pos);
+	public void setPosition(LongVector3 pos);
 
 	public float getRoll();
 
@@ -26,17 +29,17 @@ public interface EntityData {
 
 	public void setYaw(float yaw);
 
-	public Vector3<Float> getVelocity();
+	public FloatVector3 getVelocity();
 
-	public void setVelocity(Vector3<Float> velocity);
+	public void setVelocity(FloatVector3 velocity);
 
-	public Vector3<Float> getAccel();
+	public FloatVector3 getAccel();
 
-	public void setAccel(Vector3<Float> accel);
+	public void setAccel(FloatVector3 accel);
 
-	public Vector3<Float> getExtraVel();
+	public FloatVector3 getExtraVel();
 
-	public void setExtraVel(Vector3<Float> extraVel);
+	public void setExtraVel(FloatVector3 extraVel);
 
 	public float getLookPitch();
 
@@ -118,9 +121,9 @@ public interface EntityData {
 
 	public void setChargedMP(float chargedMP);
 
-	public Vector3<Float> getRayHit();
+	public FloatVector3 getRayHit();
 
-	public void setRayHit(Vector3<Float> rayHit);
+	public void setRayHit(FloatVector3 rayHit);
 
 	public float getHP();
 
@@ -246,9 +249,9 @@ public interface EntityData {
 
 	public void setNu12(long nu12);
 
-	public Vector3<Long> getSpawnPosition();
+	public LongVector3 getSpawnPosition();
 
-	public void setSpawnPosition(Vector3<Long> spawnPosition);
+	public void setSpawnPosition(LongVector3 spawnPosition);
 
 	public long getNu20();
 
