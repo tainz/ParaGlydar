@@ -9,8 +9,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.Validate;
 import org.glydar.paraglydar.configuration.Configuration;
+
+import com.google.common.base.Preconditions;
 
 /**
  * Utility class for storing and retrieving classes for {@link Configuration}.
@@ -86,7 +87,7 @@ public class ConfigurationSerialization {
 	}
 
 	public ConfigurationSerializable deserialize(Map<String, ?> args) {
-		Validate.notNull(args, "Args must not be null");
+		Preconditions.checkNotNull(args, "Args must not be null");
 
 		ConfigurationSerializable result = null;
 		Method method = null;

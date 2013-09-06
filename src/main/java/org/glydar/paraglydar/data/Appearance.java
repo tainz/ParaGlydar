@@ -1,5 +1,7 @@
 package org.glydar.paraglydar.data;
 
+import org.glydar.paraglydar.geom.FloatVector3;
+
 public interface Appearance {
 
 	public byte getNotUsed1();
@@ -134,27 +136,27 @@ public interface Appearance {
 
 	public void setBackPitch(float backPitch);
 
-	public Vector3<Float> getBodyOffset();
+	public FloatVector3 getBodyOffset();
 
-	public void setBodyOffset(Vector3<Float> bodyOffset);
+	public void setBodyOffset(FloatVector3 bodyOffset);
 
-	public Vector3<Float> getHeadOffset();
+	public FloatVector3 getHeadOffset();
 
-	public void setHeadOffset(Vector3<Float> headOffset);
+	public void setHeadOffset(FloatVector3 headOffset);
 
-	public Vector3<Float> getHandOffset();
+	public FloatVector3 getHandOffset();
 
-	public void setHandOffset(Vector3<Float> handOffset);
+	public void setHandOffset(FloatVector3 handOffset);
 
-	public Vector3<Float> getFootOffset();
+	public FloatVector3 getFootOffset();
 
-	public void setFootOffset(Vector3<Float> footOffset);
+	public void setFootOffset(FloatVector3 footOffset);
 
-	public Vector3<Float> getBackOffset();
+	public FloatVector3 getBackOffset();
 
-	public void setBackOffset(Vector3<Float> backOffset);
+	public void setBackOffset(FloatVector3 backOffset);
 
-	public Vector3<Float> getWingOffset();
+	public FloatVector3 getWingOffset();
 
-	public void setWingOffset(Vector3<Float> wingOffset);
+	public void setWingOffset(FloatVector3 wingOffset);
 }

@@ -33,4 +33,5 @@ public interface Player extends Entity, BaseTarget, CommandSender, Permissible {
 	
 	public void changeWorld(World w);
 	
+	public void stun(int seconds);
 }

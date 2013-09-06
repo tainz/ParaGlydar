@@ -8,12 +8,13 @@ import java.util.PriorityQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import org.glydar.paraglydar.plugin.Plugin;
+
+import com.google.common.base.Preconditions;
+
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
-
-import org.apache.commons.lang.Validate;
-import org.glydar.paraglydar.plugin.Plugin;
 
 /**
  * GlydarScheduler copied from CraftScheduler by the Bukkit project.
@@ -137,7 +138,7 @@ public class GlydarScheduler {
     }
 
     public void cancelTasks(final Plugin plugin) {
-        Validate.notNull(plugin, "Cannot cancel tasks of null plugin");
+        Preconditions.checkNotNull(plugin, "Cannot cancel tasks of null plugin");
         final GlydarTask task = new GlydarTask(
                 new Runnable() {
                     public void run() {
@@ -289,9 +290,9 @@ public class GlydarScheduler {
     }
 
     private static void validate(final Plugin plugin, final Object task) {
-        Validate.notNull(plugin, "Plugin cannot be null");
-        Validate.notNull(task, "Task cannot be null");
-        Validate.isTrue(plugin.isEnabled(), "Plugin must be enabled");
+    	Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+    	Preconditions.checkNotNull(task, "Task cannot be null");
+        Preconditions.checkArgument(plugin.isEnabled(), "Plugin must be enabled");
     }
 
     private int nextId() {

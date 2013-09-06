@@ -2,6 +2,7 @@ package org.glydar.paraglydar.command.manager;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -15,6 +16,7 @@ import org.glydar.paraglydar.command.CommandSender;
 import org.glydar.paraglydar.command.CommandSet;
 import org.glydar.paraglydar.plugin.Plugin;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
 public class CommandManager {
@@ -32,11 +34,11 @@ public class CommandManager {
 		this.commands = new HashMap<>();
 	}
 
-	public void register(Plugin plugin, CommandSet set, String name) {
+	public void register(Plugin plugin, CommandSet set, String... name) {
 		for (Method method : set.getClass().getDeclaredMethods()) {
 			if (validateMethod(method)) {
 				Command annotation = method.getAnnotation(Command.class);
-				if (annotation.name().equals(name)) {
+				if (Arrays.equals(annotation.name(), name)) {
 					registerMethodCommand(plugin, set, method, annotation);
 					break;
 				}
@@ -110,15 +112,10 @@ public class CommandManager {
 
 	private void registerMethodCommand(Plugin plugin, CommandSet instance, Method method, Command annotation) {
 		MethodCommandExecutor executor = new MethodCommandExecutor(instance, method, annotation);
-		register(plugin, annotation.name(), annotation.aliases(), executor);
+		register(plugin, CommandName.of(annotation.name()), executor, annotation.aliases());
 	}
 
-	public void register(Plugin plugin, String[] name, CommandExecutor executor) {
-		register(plugin, name, new String[0], executor);
-	}
-
-	public void register(Plugin plugin, String[] nameArray, String[] aliases, CommandExecutor executor) {
-		CommandName name = CommandName.of(nameArray);
+	public void register(Plugin plugin, CommandName name, CommandExecutor executor, String... aliases) {
 		register(plugin, name.getPluginPrefixed(plugin), executor, true, false);
 		register(plugin, name, executor, false, false);
 		for (String aliasPart : aliases) {
@@ -141,12 +138,12 @@ public class CommandManager {
 					return;
 				}
 
-				// Old command is an alias and the new one is not, it we be replaced
+				// Old command is an alias and the new one is not, it will be replaced
 				logger.log(Level.WARNING, "Replacing aliased command with main command {0}", name);
 			}
 		}
 
-		command = new RegisteredCommand(plugin, executor, false);
+		command = new RegisteredCommand(plugin, executor, isAlias);
 		commands.put(name, command);
 	}
 
@@ -161,7 +158,7 @@ public class CommandManager {
 			if (cmd != null) {
 				String[] realArgs = new String[args.length - name.size()];
 				System.arraycopy(args, name.size(), realArgs, 0, realArgs.length);
-				return doExecute(sender, cmd, realArgs);
+				return doExecute(sender, name, cmd, realArgs);
 			}
 
 			if (name.hasParent()) {
@@ -188,10 +185,10 @@ public class CommandManager {
 			return CommandOutcome.NOT_HANDLED;
 		}
 
-		return doExecute(sender, cmd, args);
+		return doExecute(sender, name, cmd, args);
 	}
 
-	private CommandOutcome doExecute(CommandSender sender, RegisteredCommand cmd, String... args) {
+	private CommandOutcome doExecute(CommandSender sender, CommandName name, RegisteredCommand cmd, String... args) {
 		logger.info("Handling valid command");
 		CommandOutcome outcome;
 		try {
@@ -201,6 +198,7 @@ public class CommandManager {
 			logger.log(Level.WARNING, "Exception thrown in Event handler", exc);
 		}
 
+		outcome = Objects.firstNonNull(outcome, CommandOutcome.FAILURE_OTHER);
 		switch (outcome) {
 		case SUCCESS:
 			break;
@@ -208,7 +206,7 @@ public class CommandManager {
 			sender.sendMessage(PERMISSION_ERROR);
 			break;
 		case WRONG_USAGE:
-			sender.sendMessage(cmd.getUsage());
+			sender.sendMessage("/" + name + " " + cmd.getUsage());
 			break;
 		case UNSUPPORTED_SENDER:
 			sender.sendMessage(UNSUPPORTED_SENDER_ERROR);
@@ -217,10 +215,9 @@ public class CommandManager {
 			sender.sendMessage(ERROR_OCCURRED);
 			break;
 		case NOT_HANDLED:
-			sender.sendMessage(ERROR_OCCURRED);
 			// Commands shouldn't return this
 			outcome = CommandOutcome.FAILURE_OTHER;
-			break;
+			// No break
 		case FAILURE_OTHER:
 			sender.sendMessage(ERROR_OCCURRED);
 			break;

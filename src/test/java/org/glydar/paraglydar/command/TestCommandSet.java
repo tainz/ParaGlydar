@@ -38,6 +38,11 @@ public class TestCommandSet implements CommandSet {
 		return CommandOutcome.SUCCESS;
 	}
 
+	@Command(name="usagemessage", usage="<arg>")
+	public CommandOutcome usageMessage(CommandSender sender, String... args) {
+		return CommandOutcome.WRONG_USAGE;
+	}
+
 	@Command(name="player")
 	public CommandOutcome player(Player sender, String... args) {
 		return CommandOutcome.SUCCESS;

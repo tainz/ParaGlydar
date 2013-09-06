@@ -53,6 +53,14 @@ public class CommandManagerExecuteTest {
 	}
 
 	@Test
+	public void testRegisteredByName() {
+		commandManager.register(plugin, new TestCommandSet(), "executed");
+		CommandOutcome outcome = execute("executed");
+
+		assertEquals(CommandOutcome.SUCCESS, outcome);
+	}
+
+	@Test
 	public void testUppercased() {
 		register(new TestCommandSet());
 		CommandOutcome outcome = execute("upPERCAseD");
@@ -91,6 +99,15 @@ public class CommandManagerExecuteTest {
 		CommandOutcome outcome = execute("permission");
 
 		assertEquals(CommandOutcome.NO_PERMISSION, outcome);
+	}
+
+	@Test
+	public void testUsageMessage() {
+		register(new TestCommandSet());
+		CommandOutcome outcome = execute("usagemessage");
+
+		assertEquals(CommandOutcome.WRONG_USAGE, outcome);
+		assertTrue(sender.hasReceivedMessage("/usagemessage <arg>"));
 	}
 
 	@Test
