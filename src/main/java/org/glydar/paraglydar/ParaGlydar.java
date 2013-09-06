@@ -65,6 +65,10 @@ public final class ParaGlydar {
 		return mc;
 	}
 	
+	/**
+	 * Sets the plugin loader for this runtime.
+	 * @param pluginLoader PluginLoader to be set to
+	 */
 	public static void setPluginLoader(PluginLoader pluginLoader) {
 		if (pl == null) {
 			pl = pluginLoader;
@@ -73,14 +77,27 @@ public final class ParaGlydar {
 		}
 	}
 	
+	/**
+	 * Gets the plugin loader for this runtime.
+	 * @return The plugin loader
+	 */
 	public static PluginLoader getPluginLoader(){
 		return pl;
 	}
 
+	/**
+	 * Gets the logger for this runtime
+	 * @return
+	 */
 	public static Logger getLogger() {
 		return s.getLogger();
 	}
 
+	/**
+	 * Sets the creator API for this runtime
+	 * @param m ModelCreator to be set to
+	 * @param d DataCreator to be set to
+	 */
 	public static void setCreatorAPI(ModelCreator m, DataCreator d) {
 		mc = m;
 		dc = d;
