@@ -1,5 +1,7 @@
 package org.glydar.paraglydar.geom;
 
+import com.google.common.primitives.Longs;
+
 public final class LongVector3 implements Comparable<LongVector3> {
 
 	private final long x;
@@ -97,6 +99,6 @@ public final class LongVector3 implements Comparable<LongVector3> {
 
 	@Override
 	public int compareTo(LongVector3 o) {
-		return (int) (lengthSq() - o.lengthSq());
+		return Longs.compare(lengthSq(), o.lengthSq());
 	}
 }

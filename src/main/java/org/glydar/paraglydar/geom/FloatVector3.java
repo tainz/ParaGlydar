@@ -1,5 +1,7 @@
 package org.glydar.paraglydar.geom;
 
+import com.google.common.primitives.Floats;
+
 public class FloatVector3 implements Comparable<FloatVector3> {
 
 	private final float x;
@@ -97,6 +99,6 @@ public class FloatVector3 implements Comparable<FloatVector3> {
 
 	@Override
 	public int compareTo(FloatVector3 o) {
-		return (int) (lengthSq() - o.lengthSq());
+		return Floats.compare(lengthSq(), o.lengthSq());
 	}
 }
