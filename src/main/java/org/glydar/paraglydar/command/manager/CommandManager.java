@@ -19,6 +19,9 @@ import org.glydar.paraglydar.plugin.Plugin;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
+/**
+ * This is the class that is in-charge of managing all commands.
+ */
 public class CommandManager {
 
 	private static final String PERMISSION_ERROR = "Sorry, you do not have permission for this command.";
@@ -34,6 +37,13 @@ public class CommandManager {
 		this.commands = new HashMap<>();
 	}
 
+	/**
+	 * Selectively registers a list of commands by name.
+	 * 
+	 * @param plugin The main {@link Plugin} class of the plugin that is registering this command.
+	 * @param set The class implementing {@link CommandSet} containing the commands.
+	 * @param name A set of strings representing the names of the commands being registered.
+	 */
 	public void register(Plugin plugin, CommandSet set, String... name) {
 		for (Method method : set.getClass().getDeclaredMethods()) {
 			if (validateMethod(method)) {
@@ -46,6 +56,12 @@ public class CommandManager {
 		}
 	}
 
+	/**
+	 * Registers all commands in a class that implements CommandSet
+	 * 
+	 * @param plugin The main {@link Plugin} class of the plugin that is registering this command.
+	 * @param set The class implementing {@link CommandSet} containing the commands.
+	 */
 	public void register(Plugin plugin, CommandSet set) {
 		for (Method method : set.getClass().getDeclaredMethods()) {
 			if (validateMethod(method)) {

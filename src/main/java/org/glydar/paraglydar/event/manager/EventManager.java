@@ -28,6 +28,12 @@ public class EventManager {
 		this.handlerIndex = 0;
 	}
 
+	/**
+	 * Used to register all event-methods in a specific Listener class.
+	 * 
+	 * @param plugin The main {@link Plugin} instance used by the plugin.
+	 * @param listener The class implementing listener that contains all the event-methods.
+	 */
 	public boolean register(Plugin plugin, Listener listener) {
 		for (Method method : listener.getClass().getDeclaredMethods()) {
 			EventHandler annotation = method.getAnnotation(EventHandler.class);

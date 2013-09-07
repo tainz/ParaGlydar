@@ -57,7 +57,7 @@ public final class ParaGlydar {
 	}
 
 	/**
-	 * Gets an instance of the {@link DataCreator} class used to create the various entities (Like NPCs).
+	 * Gets an instance of the {@link ModelCreator} class used to create the various entities (Like NPCs).
 	 *
 	 * @return ModelCreator instance
 	 */
@@ -67,6 +67,8 @@ public final class ParaGlydar {
 	
 	/**
 	 * Sets the plugin loader for this runtime.
+	 * Should not be used by plugins.
+	 * 
 	 * @param pluginLoader PluginLoader to be set to
 	 */
 	public static void setPluginLoader(PluginLoader pluginLoader) {
@@ -79,6 +81,7 @@ public final class ParaGlydar {
 	
 	/**
 	 * Gets the plugin loader for this runtime.
+	 * 
 	 * @return The plugin loader
 	 */
 	public static PluginLoader getPluginLoader(){
@@ -87,6 +90,7 @@ public final class ParaGlydar {
 
 	/**
 	 * Gets the logger for this runtime
+	 * 
 	 * @return
 	 */
 	public static Logger getLogger() {
@@ -95,6 +99,8 @@ public final class ParaGlydar {
 
 	/**
 	 * Sets the creator API for this runtime
+	 * Should not be used by plugins.
+	 * 
 	 * @param m ModelCreator to be set to
 	 * @param d DataCreator to be set to
 	 */

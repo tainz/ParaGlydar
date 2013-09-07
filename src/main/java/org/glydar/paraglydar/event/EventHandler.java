@@ -6,8 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Notes methods that handle events inside a listener
- *
+ * Used to note methods that handle specific events. These methods will not be invoked otherwise.
+ * 
+ * All methods using this annotation must be contained in a {@link Listener}.
+ * 
+ * @see {@link Listener}
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
