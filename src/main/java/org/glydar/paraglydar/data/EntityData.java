@@ -4,6 +4,7 @@ import java.util.BitSet;
 
 import org.glydar.paraglydar.geom.FloatVector3;
 import org.glydar.paraglydar.geom.LongVector3;
+import org.glydar.paraglydar.geom.Orientation;
 
 public interface EntityData {
 
@@ -17,17 +18,9 @@ public interface EntityData {
 
 	public void setPosition(LongVector3 pos);
 
-	public float getRoll();
+	public Orientation getOrientation();
 
-	public void setRoll(float roll);
-
-	public float getPitch();
-
-	public void setPitch(float pitch);
-
-	public float getYaw();
-
-	public void setYaw(float yaw);
+	public void setOrientation(Orientation orientation);
 
 	public FloatVector3 getVelocity();
 
