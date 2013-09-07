@@ -1,6 +1,6 @@
 package org.glydar.paraglydar.geom;
 
-public class IntVector3 implements Comparable<IntVector3> {
+public class IntVector3 implements Vector3<Integer, IntVector3> {
 
 	private final int x;
 	private final int y;
@@ -28,6 +28,30 @@ public class IntVector3 implements Comparable<IntVector3> {
 		return z;
 	}
 
+	public IntVector3 setX(int newX) {
+		return new IntVector3(newX, y, z);
+	}
+
+	public IntVector3 setY(int newY) {
+		return new IntVector3(x, newY, z);
+	}
+
+	public IntVector3 setZ(int newZ) {
+		return new IntVector3(x, y, newZ);
+	}
+
+	public IntVector3 setXY(int newX, int newY) {
+		return new IntVector3(newX, newY, z);
+	}
+
+	public IntVector3 setXZ(int newX, int newZ) {
+		return new IntVector3(newX, y, newZ);
+	}
+
+	public IntVector3 setYZ(int newY, int newZ) {
+		return new IntVector3(x, newY, newZ);
+	}
+
 	public IntVector3 add(int value) {
 		return new IntVector3(x + value, y + value, z + value);
 	}
@@ -36,6 +60,7 @@ public class IntVector3 implements Comparable<IntVector3> {
 		return new IntVector3(x + ox, y + oy, z + oz);
 	}
 
+	@Override
 	public IntVector3 add(IntVector3 other) {
 		return new IntVector3(x + other.x, y + other.y, z + other.z);
 	}
@@ -48,6 +73,7 @@ public class IntVector3 implements Comparable<IntVector3> {
 		return new IntVector3(x - ox, y - oy, z - oz);
 	}
 
+	@Override
 	public IntVector3 subtract(IntVector3 other) {
 		return new IntVector3(x - other.x, y - other.y, z - other.z);
 	}
@@ -60,6 +86,7 @@ public class IntVector3 implements Comparable<IntVector3> {
 		return new IntVector3(x * ox, y * oy, z * oz);
 	}
 
+	@Override
 	public IntVector3 multiply(IntVector3 other) {
 		return new IntVector3(x * other.x, y * other.y, z * other.z);
 	}
@@ -72,10 +99,12 @@ public class IntVector3 implements Comparable<IntVector3> {
 		return new IntVector3(x / ox, y / oy, z / oz);
 	}
 
+	@Override
 	public IntVector3 divide(IntVector3 other) {
 		return new IntVector3(x / other.x, y / other.y, z / other.z);
 	}
 
+	@Override
 	public double length() {
 		return Math.sqrt(lengthSq());
 	}
@@ -84,6 +113,7 @@ public class IntVector3 implements Comparable<IntVector3> {
 		return x * x + y * y + z * z;
 	}
 
+	@Override
 	public double distance(IntVector3 other) {
 		return Math.sqrt(distanceSq(other));
 	}
@@ -98,5 +128,20 @@ public class IntVector3 implements Comparable<IntVector3> {
 	@Override
 	public int compareTo(IntVector3 o) {
 		return lengthSq() - o.lengthSq();
+	}
+
+	@Override
+	public IntVector3 toIntVector3() {
+		return this;
+	}
+
+	@Override
+	public LongVector3 toLongVector3() {
+		return new LongVector3(x, y, z);
+	}
+
+	@Override
+	public FloatVector3 toFloatVector3() {
+		return new FloatVector3(x, y, z);
 	}
 }

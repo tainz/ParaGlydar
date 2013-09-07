@@ -2,7 +2,7 @@ package org.glydar.paraglydar.geom;
 
 import com.google.common.primitives.Longs;
 
-public final class LongVector3 implements Comparable<LongVector3> {
+public final class LongVector3 implements Vector3<Long, LongVector3> {
 
 	private final long x;
 	private final long y;
@@ -30,6 +30,30 @@ public final class LongVector3 implements Comparable<LongVector3> {
 		return z;
 	}
 
+	public LongVector3 setX(long newX) {
+		return new LongVector3(newX, y, z);
+	}
+
+	public LongVector3 setY(long newY) {
+		return new LongVector3(x, newY, z);
+	}
+
+	public LongVector3 setZ(long newZ) {
+		return new LongVector3(x, y, newZ);
+	}
+
+	public LongVector3 setXY(long newX, long newY) {
+		return new LongVector3(newX, newY, z);
+	}
+
+	public LongVector3 setXZ(long newX, long newZ) {
+		return new LongVector3(newX, y, newZ);
+	}
+
+	public LongVector3 setYZ(long newY, long newZ) {
+		return new LongVector3(x, newY, newZ);
+	}
+
 	public LongVector3 add(long value) {
 		return new LongVector3(x + value, y + value, z + value);
 	}
@@ -38,6 +62,7 @@ public final class LongVector3 implements Comparable<LongVector3> {
 		return new LongVector3(x + ox, y + oy, z + oz);
 	}
 
+	@Override
 	public LongVector3 add(LongVector3 other) {
 		return new LongVector3(x + other.x, y + other.y, z + other.z);
 	}
@@ -50,6 +75,7 @@ public final class LongVector3 implements Comparable<LongVector3> {
 		return new LongVector3(x - ox, y - oy, z - oz);
 	}
 
+	@Override
 	public LongVector3 subtract(LongVector3 other) {
 		return new LongVector3(x - other.x, y - other.y, z - other.z);
 	}
@@ -62,6 +88,7 @@ public final class LongVector3 implements Comparable<LongVector3> {
 		return new LongVector3(x * ox, y * oy, z * oz);
 	}
 
+	@Override
 	public LongVector3 multiply(LongVector3 other) {
 		return new LongVector3(x * other.x, y * other.y, z * other.z);
 	}
@@ -74,10 +101,12 @@ public final class LongVector3 implements Comparable<LongVector3> {
 		return new LongVector3(x / ox, y / oy, z / oz);
 	}
 
+	@Override
 	public LongVector3 divide(LongVector3 other) {
 		return new LongVector3(x / other.x, y / other.y, z / other.z);
 	}
 
+	@Override
 	public double length() {
 		return Math.sqrt(lengthSq());
 	}
@@ -86,6 +115,7 @@ public final class LongVector3 implements Comparable<LongVector3> {
 		return x * x + y * y + z * z;
 	}
 
+	@Override
 	public double distance(LongVector3 other) {
 		return Math.sqrt(distanceSq(other));
 	}
@@ -100,5 +130,20 @@ public final class LongVector3 implements Comparable<LongVector3> {
 	@Override
 	public int compareTo(LongVector3 o) {
 		return Longs.compare(lengthSq(), o.lengthSq());
+	}
+
+	@Override
+	public IntVector3 toIntVector3() {
+		return new IntVector3((int) x, (int) y, (int) z);
+	}
+
+	@Override
+	public LongVector3 toLongVector3() {
+		return this;
+	}
+
+	@Override
+	public FloatVector3 toFloatVector3() {
+		return new FloatVector3(x, y, z);
 	}
 }
