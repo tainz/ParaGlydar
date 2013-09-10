@@ -1,11 +1,18 @@
 package org.glydar.paraglydar.test;
 
-import java.util.logging.Logger;
+import java.util.logging.Level;
 
-public class NullLogger extends Logger {
+import org.glydar.paraglydar.logging.GlydarLogger;
+
+public class NullLogger extends GlydarLogger {
 
 	public NullLogger() {
-		super("", null);
-		setUseParentHandlers(false);
+		super(null, "", null);
+	}
+
+	public void log(Level level, Throwable thrown, String message, Object... parameters) {
+	}
+
+	public void logI(Level level, Throwable thrown, String message, Object... parameters) {
 	}
 }

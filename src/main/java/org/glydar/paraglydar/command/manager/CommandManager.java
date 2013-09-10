@@ -5,8 +5,6 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.glydar.paraglydar.command.Command;
 import org.glydar.paraglydar.command.CommandExecutor;
@@ -14,6 +12,7 @@ import org.glydar.paraglydar.command.CommandName;
 import org.glydar.paraglydar.command.CommandOutcome;
 import org.glydar.paraglydar.command.CommandSender;
 import org.glydar.paraglydar.command.CommandSet;
+import org.glydar.paraglydar.logging.GlydarLogger;
 import org.glydar.paraglydar.plugin.Plugin;
 
 import com.google.common.base.Objects;
@@ -29,10 +28,10 @@ public class CommandManager {
 	private static final String ERROR_OCCURRED = "An error occurred! Please contact the server administrators.";
 	private static final String UNSUPPORTED_SENDER_ERROR = "";
 
-	private final Logger logger;
+	private final GlydarLogger logger;
 	private final Map<CommandName, RegisteredCommand> commands;
 
-	public CommandManager(Logger logger) {
+	public CommandManager(GlydarLogger logger) {
 		this.logger = logger;
 		this.commands = new HashMap<>();
 	}
@@ -122,8 +121,8 @@ public class CommandManager {
 		return true;
 	}
 
-	private void logInvalidCommandMethod(Object... args) {
-		logger.log(Level.WARNING, "Command Method `{0}` {1}, skipping", args);
+	private void logInvalidCommandMethod(Method method, String what) {
+		logger.warning("Command Method `{0}` {1}, skipping", method, what);
 	}
 
 	private void registerMethodCommand(Plugin plugin, CommandSet instance, Method method, Command annotation) {
@@ -145,17 +144,17 @@ public class CommandManager {
 		// Check for conflict
 		if (command != null) {
 			if (isPluginPrefixed) {
-				logger.log(Level.WARNING, "Overriding existing command with plugin prefixed one", name);
+				logger.warning("Overriding existing command with plugin prefixed one");
 			}
 			else {
 				// New command is an alias or old one is not, skip registration and log conflict
 				if (isAlias || !command.isAlias()) {
-					logger.log(Level.WARNING, "Tried to register command `{0}` which is already registered", name);
+					logger.warning("Tried to register command `{0}` which is already registered", name);
 					return;
 				}
 
 				// Old command is an alias and the new one is not, it will be replaced
-				logger.log(Level.WARNING, "Replacing aliased command with main command {0}", name);
+				logger.warning("Replacing aliased command with main command {0}", name);
 			}
 		}
 
@@ -211,7 +210,7 @@ public class CommandManager {
 			outcome = cmd.execute(sender, args);
 		} catch (Exception exc) {
 			outcome = CommandOutcome.ERROR;
-			logger.log(Level.WARNING, "Exception thrown in Event handler", exc);
+			logger.warning(exc, "Exception thrown in Event handler");
 		}
 
 		outcome = Objects.firstNonNull(outcome, CommandOutcome.FAILURE_OTHER);

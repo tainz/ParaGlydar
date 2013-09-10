@@ -1,19 +1,18 @@
 package org.glydar.paraglydar.logging;
 
 import java.util.logging.Level;
-import java.util.logging.LogRecord;
 
 import org.glydar.paraglydar.i18n.I18n;
 
-public class I18nLogRecord extends LogRecord {
+public class I18nGlydarLogRecord extends GlydarLogRecord {
 
 	private static final long serialVersionUID = -445207568551121150L;
 
 	private final I18n i18n;
 	private final Object[] i18nParameters;
 
-	public I18nLogRecord(I18n i18n, Level level, String key, Object... parameters) {
-		super(level, key);
+	public I18nGlydarLogRecord(Level level, String key, String prefix, I18n i18n, Object... parameters) {
+		super(level, key, prefix);
 		this.i18n = i18n;
 		this.i18nParameters = parameters;
 	}

@@ -1,7 +1,6 @@
 package org.glydar.paraglydar.logging;
 
 import java.util.logging.Level;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import org.glydar.paraglydar.i18n.I18n;
@@ -10,37 +9,47 @@ import org.glydar.paraglydar.i18n.I18nTarget;
 
 public class GlydarLogger {
 
-	public static GlydarLogger of(I18nTarget target) {
+	public static GlydarLogger of(String prefix, I18nTarget target) {
 		I18n i18n = new I18nLoader(target).load("logs");
-		return of(Logger.getLogger(target.getClass().getCanonicalName()), i18n);
+		return of(Logger.getLogger(target.getClass().getCanonicalName()), prefix, i18n);
 	}
 
-	public static GlydarLogger of(Logger logger, I18n i18n) {
-		return new GlydarLogger(logger, i18n);
+	public static GlydarLogger of(Logger logger, String prefix, I18n i18n) {
+		return new GlydarLogger(logger, prefix, i18n);
 	}
 
-	private final Logger logger;
+	private final String prefix;
+	private final Logger jdkLogger;
 	private final I18n i18n;
 
-	protected GlydarLogger(Logger logger, I18n i18n) {
-		this.logger = logger;
+	protected GlydarLogger(Logger jdkLogger, String prefix, I18n i18n) {
+		this.prefix = prefix;
+		this.jdkLogger = jdkLogger;
 		this.i18n = i18n;
 	}
 
+	public Logger getJdkLogger() {
+		return jdkLogger;
+	}
+
+	public void setParent(GlydarLogger logger) {
+		jdkLogger.setParent(logger.jdkLogger);
+	}
+
 	public void log(Level level, Throwable thrown, String message, Object... parameters) {
-		LogRecord record = new LogRecord(level, message);
+		GlydarLogRecord record = new GlydarLogRecord(level, message, prefix);
 		record.setThrown(thrown);
 		if (parameters.length > 1) {
 			record.setParameters(parameters);
 		}
 
-		logger.log(record);
+		jdkLogger.log(record);
 	}
 
 	public void logI(Level level, Throwable thrown, String key, Object... parameters) {
-		I18nLogRecord record = new I18nLogRecord(i18n, level, key, parameters);
+		I18nGlydarLogRecord record = new I18nGlydarLogRecord(level, key, prefix, i18n, parameters);
 		record.setThrown(thrown);
-		logger.log(record);
+		jdkLogger.log(record);
 	}
 
 	public void log(Level level, String message, Object... parameters) {

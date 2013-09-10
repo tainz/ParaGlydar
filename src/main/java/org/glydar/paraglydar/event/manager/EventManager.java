@@ -4,25 +4,24 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.glydar.paraglydar.event.Event;
 import org.glydar.paraglydar.event.EventHandler;
 import org.glydar.paraglydar.event.EventPriority;
 import org.glydar.paraglydar.event.Listener;
 import org.glydar.paraglydar.event.manager.RegisteredHandlers.RegisteredHandler;
+import org.glydar.paraglydar.logging.GlydarLogger;
 import org.glydar.paraglydar.plugin.Plugin;
 
 import com.google.common.base.Predicate;
 
 public class EventManager {
 
-	private final Logger logger;
+	private final GlydarLogger logger;
 	private final Map<Class<? extends Event>, RegisteredHandlers> map;
 	private int handlerIndex;
 
-	public EventManager(Logger logger) {
+	public EventManager(GlydarLogger logger) {
 		this.logger = logger;
 		this.map = new HashMap<>();
 		this.handlerIndex = 0;
@@ -68,8 +67,8 @@ public class EventManager {
 		return true;
 	}
 
-	private void logInvalidEventHandlerMethod(Object... args) {
-		logger.log(Level.WARNING, "Event Handler Method `{0}` {1}, skipping", args);
+	private void logInvalidEventHandlerMethod(Method method, String what) {
+		logger.warning("Event Handler Method `{0}` {1}, skipping", method, what);
 	}
 
 	private <E extends Event> void register(Plugin plugin, Listener listener, Method method, Class<E> eventClass,
@@ -165,8 +164,7 @@ public class EventManager {
 				executor.execute(event);
 			}
 			catch (Exception exc) {
-				logger.log(Level.WARNING,
-						"Exception thrown in Event handler", exc);
+				logger.warning(exc, "Exception thrown in Event handler");
 			}
 		}
 

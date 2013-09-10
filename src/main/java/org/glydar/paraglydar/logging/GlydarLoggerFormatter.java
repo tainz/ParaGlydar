@@ -11,7 +11,7 @@ import java.util.logging.LogRecord;
 public class GlydarLoggerFormatter extends Formatter {
 
 	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("[HH:mm:ss]");
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("[HH:mm:ss] ");
 
 	private final boolean displaySource;
 
@@ -24,7 +24,11 @@ public class GlydarLoggerFormatter extends Formatter {
 		StringBuilder builder = new StringBuilder();
 
 		builder.append(DATE_FORMAT.format(new Date(record.getMillis())));
-		builder.append(" ");
+		if (record instanceof GlydarLogRecord) {
+			builder.append("[");
+			builder.append(((GlydarLogRecord) record).getPrefix());
+			builder.append("] ");
+		}
 		builder.append(record.getLevel().getLocalizedName());
 		builder.append(": ");
 		builder.append(formatMessage(record));

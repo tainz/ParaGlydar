@@ -14,7 +14,6 @@ import com.google.common.base.Preconditions;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.logging.Level;
 
 /**
  * GlydarScheduler copied from CraftScheduler by the Bukkit project.
@@ -253,13 +252,9 @@ public class GlydarScheduler {
             try {
                 task.run();
             } catch (final Throwable throwable) {
-                task.getPlugin().getLogger().log(
-                        Level.WARNING,
-                        String.format(
-                                "Task #%s for %s generated an exception",
-                                task.getID(),
-                                task.getPlugin().getName()),
-                        throwable);
+                task.getPlugin().getLogger().warning(throwable,
+                        "Task #{0} for {1} generated an exception",
+                        task.getID(), task.getPlugin().getName());
             }
             parsePending();
             final long period = task.getInterval(); // State consistency

@@ -18,6 +18,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import org.glydar.paraglydar.ParaGlydar;
+import org.glydar.paraglydar.logging.GlydarLogger;
 
 public class PluginLoader {
 
@@ -75,7 +76,9 @@ public class PluginLoader {
 			return;
 		}
 
-		plugin.initialize(ParaGlydar.getServer(), this, new PluginLogger(plugin));
+		GlydarLogger logger = GlydarLogger.of(plugin.getName(), plugin);
+		logger.setParent(ParaGlydar.getLogger());
+		plugin.initialize(ParaGlydar.getServer(), this, logger);
 		StringBuffer sb = new StringBuffer();
 		try {
 			jarMap.put(plugin.getName(), file.toURI().toURL());

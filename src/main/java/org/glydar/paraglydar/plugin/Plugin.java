@@ -17,13 +17,14 @@ import org.glydar.paraglydar.command.CommandSet;
 import org.glydar.paraglydar.i18n.I18n;
 import org.glydar.paraglydar.i18n.I18nLoader;
 import org.glydar.paraglydar.i18n.I18nTarget;
+import org.glydar.paraglydar.logging.GlydarLogger;
 
 import com.google.common.collect.ImmutableList;
 
 public abstract class Plugin implements CommandSet, I18nTarget {
 
 	private PluginLoader loader;
-	private PluginLogger logger;
+	private GlydarLogger logger;
 	private Server server;
 	private boolean enabled = false;
 
@@ -41,7 +42,7 @@ public abstract class Plugin implements CommandSet, I18nTarget {
 		return null;
 	}
 
-	public PluginLogger getLogger() {
+	public GlydarLogger getLogger() {
 		return logger;
 	}
 
@@ -57,8 +58,8 @@ public abstract class Plugin implements CommandSet, I18nTarget {
 	public Iterable<URL> getI18nLocations(String filename) {
 		ImmutableList.Builder<URL> builder= ImmutableList.builder();
 
-		URLClassLoader cl = loader.getClassLoader(this);
-		builder.add(cl.getResource(filename));
+		// URLClassLoader cl = loader.getClassLoader(this);
+		// builder.add(cl.getResource(filename));
 
 		File userLocation = new File(getConfigFolder(), filename);
 		if (userLocation.exists()) {
@@ -151,7 +152,7 @@ public abstract class Plugin implements CommandSet, I18nTarget {
 		}
 	}
 
-	protected final void initialize(Server server, PluginLoader loader, PluginLogger logger) {
+	protected final void initialize(Server server, PluginLoader loader, GlydarLogger logger) {
 		this.server = server;
 		this.logger = logger;
 		this.loader = loader;

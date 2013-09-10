@@ -1,8 +1,7 @@
 package org.glydar.paraglydar;
 
-import java.util.logging.Logger;
-
 import org.glydar.paraglydar.data.DataCreator;
+import org.glydar.paraglydar.logging.GlydarLogger;
 import org.glydar.paraglydar.models.ModelCreator;
 import org.glydar.paraglydar.plugin.PluginLoader;
 
@@ -93,7 +92,7 @@ public final class ParaGlydar {
 	 * 
 	 * @return
 	 */
-	public static Logger getLogger() {
+	public static GlydarLogger getLogger() {
 		return s.getLogger();
 	}
 

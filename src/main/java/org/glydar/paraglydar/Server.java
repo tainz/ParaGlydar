@@ -3,10 +3,10 @@ package org.glydar.paraglydar;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.glydar.paraglydar.command.manager.CommandManager;
 import org.glydar.paraglydar.event.manager.EventManager;
+import org.glydar.paraglydar.logging.GlydarLogger;
 import org.glydar.paraglydar.models.Entity;
 import org.glydar.paraglydar.models.Player;
 import org.glydar.paraglydar.models.World;
@@ -90,7 +90,7 @@ public interface Server {
 	 * Gets the logger for this runtime
 	 * @return This runtime's logger
 	 */
-	public Logger getLogger();
+	public GlydarLogger getLogger();
 
 	/**
 	 * Returns true if the server is currently running.
