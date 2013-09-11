@@ -26,7 +26,8 @@ public class PluginLoader {
 	private Map<String, URL> jarMap = new HashMap<String, URL>();
 
 	public void loadPlugins() {
-		File pluginDir = new File("plugins");
+		File pluginDir = ParaGlydar.getServer().getBaseFolder().resolve("plugins").toFile();
+
 		if (!pluginDir.exists()) {
 			pluginDir.mkdirs();
 			return;

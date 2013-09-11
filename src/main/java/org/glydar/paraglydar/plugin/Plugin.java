@@ -11,6 +11,7 @@ import java.net.URLClassLoader;
 import java.util.Locale;
 import java.util.logging.Level;
 
+import org.glydar.paraglydar.ParaGlydar;
 import org.glydar.paraglydar.Server;
 import org.glydar.paraglydar.command.CommandSet;
 import org.glydar.paraglydar.i18n.I18n;
@@ -59,7 +60,7 @@ public abstract class Plugin implements CommandSet, I18nTarget {
 		URLClassLoader cl = loader.getClassLoader(this);
 		builder.add(cl.getResource(filename));
 
-		File userLocation = new File(getFolder(), filename);
+		File userLocation = new File(getConfigFolder(), filename);
 		if (userLocation.exists()) {
 			try {
 				builder.add(userLocation.toURI().toURL());
@@ -100,7 +101,7 @@ public abstract class Plugin implements CommandSet, I18nTarget {
 		}
 	}
 
-	public File getFolder() {
+	public File getConfigFolder() {
 		File file = new File("config/" + getName());
 		if (!file.exists()) {
 			file.mkdirs();
@@ -114,7 +115,7 @@ public abstract class Plugin implements CommandSet, I18nTarget {
 	}
 
 	public void saveResource(String name) {
-		File file = new File(getFolder(), name);
+		File file = ParaGlydar.getServer().getConfigFolder().resolve(name).toFile();
 		saveResource(name, file);
 	}
 

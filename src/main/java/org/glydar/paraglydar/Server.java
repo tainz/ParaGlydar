@@ -1,5 +1,6 @@
 package org.glydar.paraglydar;
 
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
@@ -12,6 +13,16 @@ import org.glydar.paraglydar.models.World;
 import org.glydar.paraglydar.permissions.Permission;
 
 public interface Server {
+
+	/**
+	 * Gets the base folder this server use for 
+	 */
+	Path getBaseFolder();
+
+	/**
+	 * Gets the base folder this server use for 
+	 */
+	Path getConfigFolder();
 
 	/**
 	 * Gets the event manager currently used
