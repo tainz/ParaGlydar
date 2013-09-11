@@ -1,13 +1,8 @@
 package org.glydar.paraglydar.event.events;
 
-import java.util.Collection;
-
 import org.glydar.paraglydar.data.EntityData;
 import org.glydar.paraglydar.event.Event;
-import org.glydar.paraglydar.models.BaseTarget;
-import org.glydar.paraglydar.models.CustomTarget;
 import org.glydar.paraglydar.models.Player;
-import org.glydar.paraglydar.models.WorldTarget;
 
 /**
  * Represents the event called when a player's client sends an updated
