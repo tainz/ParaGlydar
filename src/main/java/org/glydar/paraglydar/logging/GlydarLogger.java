@@ -39,7 +39,7 @@ public class GlydarLogger {
 	public void log(Level level, Throwable thrown, String message, Object... parameters) {
 		GlydarLogRecord record = new GlydarLogRecord(level, message, prefix);
 		record.setThrown(thrown);
-		if (parameters.length > 1) {
+		if (parameters.length > 0) {
 			record.setParameters(parameters);
 		}
 

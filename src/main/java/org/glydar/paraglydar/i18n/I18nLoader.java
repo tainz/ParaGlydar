@@ -16,10 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ServiceLoader;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.regex.Pattern;
-
-import org.glydar.paraglydar.ParaGlydar;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
@@ -93,7 +90,6 @@ public class I18nLoader {
 			putAll(map, loader.load(reader), locale);
 		}
 		catch (IOException exc) {
-			ParaGlydar.getLogger().log(Level.SEVERE, "Unable to read localization data for location : " + location, exc);
 		}
 	}
 

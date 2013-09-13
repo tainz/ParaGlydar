@@ -5,36 +5,17 @@ import java.util.Collection;
 import java.util.List;
 
 import org.glydar.paraglydar.command.manager.CommandManager;
+import org.glydar.paraglydar.data.DataCreator;
 import org.glydar.paraglydar.event.manager.EventManager;
 import org.glydar.paraglydar.logging.GlydarLogger;
 import org.glydar.paraglydar.models.Entity;
+import org.glydar.paraglydar.models.ModelCreator;
 import org.glydar.paraglydar.models.Player;
 import org.glydar.paraglydar.models.World;
 import org.glydar.paraglydar.permissions.Permission;
+import org.glydar.paraglydar.plugin.PluginLoader;
 
 public interface Server {
-
-	/**
-	 * Gets the base folder this server use for 
-	 */
-	Path getBaseFolder();
-
-	/**
-	 * Gets the base folder this server use for 
-	 */
-	Path getConfigFolder();
-
-	/**
-	 * Gets the event manager currently used
-	 * @return The EventManager that Glydar is currently using
-	 */
-	public EventManager getEventManager();
-	
-	/**
-	 * Gets the command manager currently used
-	 * @return The CommandManager that Glydar is currently using
-	 */
-	public CommandManager getCommandManager();
 
 	/**
 	 * Gets the server's name
@@ -47,6 +28,36 @@ public interface Server {
 	 * @return Version of the server
 	 */
 	public String getVersion();
+
+	public Path getBaseFolder();
+
+	public Path getConfigFolder();
+
+	/**
+	 * Gets the logger for this runtime
+	 * @return This runtime's logger
+	 */
+	public GlydarLogger getLogger();
+
+	public ServerConfig getConfig();
+
+	public PluginLoader getPluginLoader();
+
+	/**
+	 * Gets the event manager currently used
+	 * @return The EventManager that Glydar is currently using
+	 */
+	public EventManager getEventManager();
+
+	/**
+	 * Gets the command manager currently used
+	 * @return The CommandManager that Glydar is currently using
+	 */
+	public CommandManager getCommandManager();
+
+	public DataCreator getDataCreator();
+
+	public ModelCreator getModelCreator();
 
 	/**
 	 * Gets all currently connected players
@@ -87,12 +98,6 @@ public interface Server {
 	public List<World> getWorlds();
 
 	/**
-	 * Gets the logger for this runtime
-	 * @return This runtime's logger
-	 */
-	public GlydarLogger getLogger();
-
-	/**
 	 * Returns true if the server is currently running.
 	 * @return Whether or not the server is currently running.
 	 */
@@ -122,35 +127,10 @@ public interface Server {
 	 * @param permission The permission to be matched against
 	 */
 	public void broadcast(String message, Permission permission);
-	
-	/**
-	 * Returns true if the server is currently in debug mode
-	 * @return Whether or not the server is currently in debug mode
-	 */
-	public boolean isDebugging();
-	
+
 	/**
 	 * If debugging is enabled, then the specified message is printed to the console
 	 * @param message The debug message to be sent
 	 */
 	public void debug(String message);
-	
-	/**
-	 * Returns the maximum amount of players that are allowed on the server at any one point in time
-	 * @return Maximum amount of players
-	 */
-	public int getMaxPlayers();
-	
-	/**
-	 * Cheaty way to set the maximum amount of players
-	 * @param maxPlayers Maximum amount of players
-	 */
-	public void setMaxPlayers(int maxPlayers);
-	
-	/**
-	 * Returns the port that the server is currently running on
-	 * @return The port
-	 */
-	public int getPort();
-	
 }

@@ -9,10 +9,8 @@ import org.glydar.paraglydar.plugin.PluginLoader;
  * Represents the Glydar API
  */
 public final class ParaGlydar {
-	private static Server s;
-	private static ModelCreator mc;
-	private static DataCreator dc;
-	private static PluginLoader pl;
+
+	private static Server server;
 
 	/**
 	 * Static class cannot be initialized.
@@ -20,15 +18,13 @@ public final class ParaGlydar {
 	private ParaGlydar() {
 	}
 
-	;
-
 	/**
 	 * Gets the current {@link Server} singleton
 	 *
 	 * @return Server instance being ran
 	 */
 	public static Server getServer() {
-		return s;
+		return server;
 	}
 
 	/**
@@ -39,8 +35,8 @@ public final class ParaGlydar {
 	 * @param server Server instance
 	 */
 	public static void setServer(Server server) {
-		if (s == null) {
-			s = server;
+		if (ParaGlydar.server == null) {
+			ParaGlydar.server = server;
 		} else {
 			getLogger().severe("Can't change the server instance!");
 		}
@@ -52,7 +48,7 @@ public final class ParaGlydar {
 	 * @return DataCreator instance
 	 */
 	public static DataCreator getDataCreator() {
-		return dc;
+		return server.getDataCreator();
 	}
 
 	/**
@@ -61,30 +57,16 @@ public final class ParaGlydar {
 	 * @return ModelCreator instance
 	 */
 	public static ModelCreator getModelCreator() {
-		return mc;
+		return server.getModelCreator();
 	}
-	
-	/**
-	 * Sets the plugin loader for this runtime.
-	 * Should not be used by plugins.
-	 * 
-	 * @param pluginLoader PluginLoader to be set to
-	 */
-	public static void setPluginLoader(PluginLoader pluginLoader) {
-		if (pl == null) {
-			pl = pluginLoader;
-		} else {
-			getLogger().severe("Can't change the plugin loader instance!");
-		}
-	}
-	
+
 	/**
 	 * Gets the plugin loader for this runtime.
 	 * 
 	 * @return The plugin loader
 	 */
 	public static PluginLoader getPluginLoader(){
-		return pl;
+		return server.getPluginLoader();
 	}
 
 	/**
@@ -93,18 +75,6 @@ public final class ParaGlydar {
 	 * @return
 	 */
 	public static GlydarLogger getLogger() {
-		return s.getLogger();
-	}
-
-	/**
-	 * Sets the creator API for this runtime
-	 * Should not be used by plugins.
-	 * 
-	 * @param m ModelCreator to be set to
-	 * @param d DataCreator to be set to
-	 */
-	public static void setCreatorAPI(ModelCreator m, DataCreator d) {
-		mc = m;
-		dc = d;
+		return server.getLogger();
 	}
 }
