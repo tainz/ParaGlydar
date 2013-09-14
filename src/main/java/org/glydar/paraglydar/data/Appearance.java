@@ -159,4 +159,12 @@ public interface Appearance {
 	public FloatVector3 getWingOffset();
 
 	public void setWingOffset(FloatVector3 wingOffset);
+	
+	public float getShoulderScale();
+
+	public void setShoulderScale(float shoulderScale);
+
+	public float getWeaponScale();
+
+	public void setWeaponScale(float weaponScale);
 }
