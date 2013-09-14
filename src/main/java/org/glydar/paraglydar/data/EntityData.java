@@ -5,14 +5,21 @@ import java.util.BitSet;
 import org.glydar.paraglydar.geom.FloatVector3;
 import org.glydar.paraglydar.geom.LongVector3;
 import org.glydar.paraglydar.geom.Orientation;
+import org.glydar.paraglydar.models.Entity;
 
 public interface EntityData {
 
 	public long getId();
 
 	public void setId(long id);
+	
+	public void setEntity(Entity e);
+	
+	public Entity getEntity();
 
 	public BitSet getBitSet();
+	
+	public void setBitSet(BitSet b);
 
 	public LongVector3 getPosition();
 
