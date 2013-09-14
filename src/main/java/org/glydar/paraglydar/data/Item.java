@@ -1,45 +1,113 @@
 package org.glydar.paraglydar.data;
 
-public interface Item {
+public class Item {
+	byte type, subtype;
+	long modifier; //Uint
+	long minusModifier; //Uint
+	byte rarity, material, flags;
+	short level; //ushort
+	ItemUpgrade[] upgrades;
+	long upgradeCount; //unsigned
 
-	public byte getType();
+	public Item(Item i) {
+		this.type = i.getType();
+		this.subtype = i.getSubtype();
+		this.modifier = i.getModifier();
+		this.minusModifier = i.getMinusModifier();
+		this.rarity = i.getRarity();
+		this.material = i.getMaterial();
+		this.flags = i.getFlags();
+		this.level = i.getLevel();
+		this.upgrades = new ItemUpgrade[i.getUpgrades().length];
+		for (int j = 0; j < i.getUpgrades().length; j++) {
+			this.upgrades[j] = new ItemUpgrade(i.getUpgrades()[j]);
+		}
+		this.upgradeCount = i.getUpgradeCount();
+	}
 
-	public void setType(byte type);
+	public Item() {
+		upgrades = new ItemUpgrade[32];
+		for (int i = 0; i < 32; i++)
+			upgrades[i] = new ItemUpgrade();
+	}
 
-	public byte getSubtype();
+	public byte getType() {
+		return type;
+	}
 
-	public void setSubtype(byte subtype);
+	public void setType(byte type) {
+		this.type = type;
+	}
 
-	public long getModifier();
+	public byte getSubtype() {
+		return subtype;
+	}
 
-	public void setModifier(long modifier);
+	public void setSubtype(byte subtype) {
+		this.subtype = subtype;
+	}
 
-	public long getMinusModifier();
+	public long getModifier() {
+		return modifier;
+	}
 
-	public void setMinusModifier(long minusModifier);
+	public void setModifier(long modifier) {
+		this.modifier = modifier;
+	}
 
-	public byte getRarity();
+	public long getMinusModifier() {
+		return minusModifier;
+	}
 
-	public void setRarity(byte rarity);
+	public void setMinusModifier(long minusModifier) {
+		this.minusModifier = minusModifier;
+	}
 
-	public byte getMaterial();
+	public byte getRarity() {
+		return rarity;
+	}
 
-	public void setMaterial(byte material);
+	public void setRarity(byte rarity) {
+		this.rarity = rarity;
+	}
 
-	public byte getFlags();
+	public byte getMaterial() {
+		return material;
+	}
 
-	public void setFlags(byte flags);
+	public void setMaterial(byte material) {
+		this.material = material;
+	}
 
-	public short getLevel();
+	public byte getFlags() {
+		return flags;
+	}
 
-	public void setLevel(short level);
+	public void setFlags(byte flags) {
+		this.flags = flags;
+	}
 
-	public ItemUpgrade[] getUpgrades();
+	public short getLevel() {
+		return level;
+	}
 
-	public void setUpgrades(ItemUpgrade[] upgrades);
+	public void setLevel(short level) {
+		this.level = level;
+	}
 
-	public long getUpgradeCount();
+	public ItemUpgrade[] getUpgrades() {
+		return upgrades;
+	}
 
-	public void setUpgradeCount(long upgradeCount);
+	public void setUpgrades(ItemUpgrade[] upgrades) {
+		this.upgrades = (ItemUpgrade[]) upgrades;
+	}
 
+	public long getUpgradeCount() {
+		return upgradeCount;
+	}
+
+	public void setUpgradeCount(long upgradeCount) {
+		this.upgradeCount = upgradeCount;
+	}
 }

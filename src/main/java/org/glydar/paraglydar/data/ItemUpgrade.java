@@ -1,25 +1,61 @@
 package org.glydar.paraglydar.data;
 
-public interface ItemUpgrade {
+public class ItemUpgrade {
+	byte xOffset;
+	byte yOffset;
+	byte zOffset;
+	byte material;
+	long level;
 
-	public byte getxOffset();
+	public ItemUpgrade() {
+	}
 
-	public void setxOffset(byte xOffset);
+	public ItemUpgrade(ItemUpgrade i) {
+		this.xOffset = i.getxOffset();
+		this.yOffset = i.getyOffset();
+		this.zOffset = i.getzOffset();
+		this.material = i.getMaterial();
+		this.level = i.getLevel();
+	}
 
-	public byte getyOffset();
+	public byte getxOffset() {
+		return xOffset;
+	}
 
-	public void setyOffset(byte yOffset);
+	public void setxOffset(byte xOffset) {
+		this.xOffset = xOffset;
+	}
 
-	public byte getzOffset();
+	public byte getyOffset() {
+		return yOffset;
+	}
 
-	public void setzOffset(byte zOffset);
+	public void setyOffset(byte yOffset) {
+		this.yOffset = yOffset;
+	}
 
-	public byte getMaterial();
+	public byte getzOffset() {
+		return zOffset;
+	}
 
-	public void setMaterial(byte material);
+	public void setzOffset(byte zOffset) {
+		this.zOffset = zOffset;
+	}
 
-	public long getLevel();
+	public byte getMaterial() {
+		return material;
+	}
 
-	public void setLevel(long level);
+	public void setMaterial(byte material) {
+		this.material = material;
+	}
+
+	public long getLevel() {
+		return level;
+	}
+
+	public void setLevel(long level) {
+		this.level = level;
+	}
 
 }
